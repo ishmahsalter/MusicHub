@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ══ AURORA VOID — PRIMARY BACKGROUNDS ══ -->
+    <color name="bg_primary">#07000F</color>
+    <color name="bg_secondary">#09001A</color>
+    <color name="bg_tertiary">#110026</color>
+    <color name="bg_card">#130030</color>
+    <color name="bg_card_deep">#0C001F</color>
+
+    <!-- ══ PURPLE GLOW ══ -->
+    <color name="purple_primary">#A855F7</color>
+    <color name="purple_dark">#7C3AED</color>
+    <color name="purple_deeper">#6D28D9</color>
+    <color name="purple_subtle">#4C1D95</color>
+    <color name="purple_glow">#C084FC</color>
+    <color name="purple_soft">#E9D5FF</color>
+
+    <!-- ══ GOLD ACCENTS ══ -->
+    <color name="gold_primary">#D4AF37</color>
+    <color name="gold_dark">#B8860B</color>
+    <color name="gold_soft">#FEF3C7</color>
+
+    <!-- ══ TEXT ══ -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#99FFFFFF</color>
+    <color name="text_muted">#55FFFFFF</color>
+    <color name="text_hint">#33FFFFFF</color>
+
+    <!-- ══ BORDERS / GLASS ══ -->
+    <color name="border_purple">#47A855F7</color>
+    <color name="border_gold">#47D4AF37</color>
+    <color name="border_white">#14FFFFFF</color>
+
+    <!-- ══ STATUS ══ -->
+    <color name="liked">#D4AF37</color>
+    <color name="error">#EF4444</color>
+    <color name="success">#4ADE80</color>
+
+    <!-- ══ LEGACY (jangan dihapus) ══ -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

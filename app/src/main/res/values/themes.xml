@@ -1,9 +1,35 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MusicHub" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MusicHub" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-    <style name="Theme.MusicHub" parent="Base.Theme.MusicHub" />
+        <!-- Background -->
+        <item name="android:windowBackground">@color/bg_primary</item>
+        <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="colorSurface">@color/bg_card</item>
+
+        <!-- Primary = Purple -->
+        <item name="colorPrimary">@color/purple_primary</item>
+        <item name="colorPrimaryVariant">@color/purple_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary = Gold -->
+        <item name="colorSecondary">@color/gold_primary</item>
+        <item name="colorSecondaryVariant">@color/gold_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Text -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+
+        <!-- Status bar & Navigation bar -->
+        <item name="android:statusBarColor">@color/bg_primary</item>
+        <item name="android:navigationBarColor">@color/bg_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- No title bar -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+    </style>
 </resources>
