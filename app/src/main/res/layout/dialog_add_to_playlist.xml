@@ -50,7 +50,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_favorite"
+            android:src="@drawable/ic_playlist_add"
             android:layout_marginEnd="10dp"
             android:tint="@color/purple_glow" />
 
@@ -60,8 +60,7 @@
             android:text="Create New Playlist"
             android:textColor="@color/purple_glow"
             android:textSize="14sp"
-            android:fontFamily="@font/font_space_grotesk"
-            android:fontWeight="600" />
+            android:fontFamily="@font/font_space_grotesk" />
 
     </LinearLayout>
 
@@ -70,8 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end"
-        android:gap="8dp">
+        android:gravity="end">
 
         <Button
             android:id="@+id/btn_cancel"
@@ -80,7 +78,8 @@
             android:text="Cancel"
             android:textColor="@color/text_muted"
             android:backgroundTint="@color/bg_secondary"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/btn_save"

@@ -113,7 +113,7 @@
 
     </LinearLayout>
 
-    <!-- Progress Bar -->
+    <!-- SeekBar -->
     <SeekBar
         android:id="@+id/seek_bar"
         android:layout_width="match_parent"
@@ -125,6 +125,7 @@
         android:minHeight="4dp"
         android:maxHeight="4dp" />
 
+    <!-- Time -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -160,7 +161,6 @@
         android:gravity="center"
         android:layout_marginBottom="16dp">
 
-        <!-- Shuffle -->
         <ImageView
             android:id="@+id/btn_shuffle"
             android:layout_width="40dp"
@@ -170,7 +170,6 @@
             android:background="@drawable/bg_ctrl_btn"
             android:layout_marginEnd="12dp" />
 
-        <!-- Skip Prev -->
         <ImageView
             android:id="@+id/btn_prev"
             android:layout_width="40dp"
@@ -180,7 +179,6 @@
             android:background="@drawable/bg_ctrl_btn"
             android:layout_marginEnd="12dp" />
 
-        <!-- Play/Pause — besar dengan glow -->
         <ImageView
             android:id="@+id/btn_play"
             android:layout_width="56dp"
@@ -190,7 +188,6 @@
             android:background="@drawable/bg_play_main_btn"
             android:layout_marginEnd="12dp" />
 
-        <!-- Skip Next -->
         <ImageView
             android:id="@+id/btn_next"
             android:layout_width="40dp"
@@ -200,7 +197,6 @@
             android:background="@drawable/bg_ctrl_btn"
             android:layout_marginEnd="12dp" />
 
-        <!-- Repeat -->
         <ImageView
             android:id="@+id/btn_repeat"
             android:layout_width="40dp"
@@ -211,7 +207,14 @@
 
     </LinearLayout>
 
-    <!-- Action Row: Lyrics, Playlist, Album, Artist, Share -->
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#0DFFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Action Row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -226,8 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
-            android:gap="4dp">
+            android:gravity="center">
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -239,6 +241,7 @@
                 android:text="Lyrics"
                 android:textColor="@color/purple_glow"
                 android:textSize="10sp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/font_space_grotesk" />
         </LinearLayout>
 
@@ -249,8 +252,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
-            android:gap="4dp">
+            android:gravity="center">
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -262,6 +264,7 @@
                 android:text="Playlist"
                 android:textColor="@color/gold_primary"
                 android:textSize="10sp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/font_space_grotesk" />
         </LinearLayout>
 
@@ -272,8 +275,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
-            android:gap="4dp">
+            android:gravity="center">
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -285,6 +287,7 @@
                 android:text="Album"
                 android:textColor="@color/purple_glow"
                 android:textSize="10sp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/font_space_grotesk" />
         </LinearLayout>
 
@@ -295,8 +298,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
-            android:gap="4dp">
+            android:gravity="center">
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -308,6 +310,7 @@
                 android:text="Artist"
                 android:textColor="@color/purple_glow"
                 android:textSize="10sp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/font_space_grotesk" />
         </LinearLayout>
 
@@ -318,8 +321,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
-            android:gap="4dp">
+            android:gravity="center">
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -331,10 +333,18 @@
                 android:text="Share"
                 android:textColor="#66FFFFFF"
                 android:textSize="10sp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/font_space_grotesk" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#0DFFFFFF"
+        android:layout_marginBottom="8dp" />
 
     <!-- Bottom Nav -->
     <LinearLayout
@@ -342,7 +352,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:paddingTop="8dp"
+        android:paddingTop="4dp"
         android:paddingBottom="8dp">
 
         <!-- Home -->
@@ -352,7 +362,6 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:gap="2dp"
             android:alpha="0.3">
             <ImageView
                 android:layout_width="22dp"
@@ -364,6 +373,7 @@
                 android:text="HOME"
                 android:textColor="@color/white"
                 android:textSize="8sp"
+                android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
                 android:letterSpacing="0.1" />
         </LinearLayout>
@@ -375,7 +385,6 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:gap="2dp"
             android:alpha="0.3">
             <ImageView
                 android:layout_width="22dp"
@@ -387,6 +396,7 @@
                 android:text="FIND"
                 android:textColor="@color/white"
                 android:textSize="8sp"
+                android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
                 android:letterSpacing="0.1" />
         </LinearLayout>
@@ -408,7 +418,6 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:gap="2dp"
             android:alpha="0.3">
             <ImageView
                 android:layout_width="22dp"
@@ -420,6 +429,7 @@
                 android:text="FAVS"
                 android:textColor="@color/white"
                 android:textSize="8sp"
+                android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
                 android:letterSpacing="0.1" />
         </LinearLayout>
@@ -431,7 +441,6 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:gap="2dp"
             android:alpha="0.3">
             <ImageView
                 android:layout_width="22dp"
@@ -443,6 +452,7 @@
                 android:text="ME"
                 android:textColor="@color/white"
                 android:textSize="8sp"
+                android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
                 android:letterSpacing="0.1" />
         </LinearLayout>
