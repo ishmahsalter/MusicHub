@@ -22,14 +22,37 @@
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:textColorHint">@color/text_hint</item>
 
-        <!-- Status bar & Navigation bar -->
+        <!-- Default font = Space Grotesk -->
+        <item name="android:fontFamily">@font/font_space_grotesk</item>
+
+        <!-- Status bar -->
         <item name="android:statusBarColor">@color/bg_primary</item>
         <item name="android:navigationBarColor">@color/bg_primary</item>
         <item name="android:windowLightStatusBar">false</item>
 
-        <!-- No title bar -->
+        <!-- No action bar -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
 
     </style>
+
+    <!-- Style untuk judul pakai Bebas Neue -->
+    <style name="TextStyle.Display" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/font_bebas</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <!-- Style untuk body pakai DM Sans -->
+    <style name="TextStyle.Body" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/font_dm_sans</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- Style untuk label/meta pakai Space Grotesk -->
+    <style name="TextStyle.Meta" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/font_space_grotesk</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+
 </resources>

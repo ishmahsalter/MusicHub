@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="10dp"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- Cover -->
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/purple_deeper"
+        app:cardElevation="0dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="🎵"
+            android:gravity="center"
+            android:textSize="18sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Info -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_playlist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Playlist Name"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:fontFamily="@font/font_space_grotesk"
+            android:fontWeight="600" />
+
+        <TextView
+            android:id="@+id/tv_track_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 songs"
+            android:textColor="@color/text_muted"
+            android:textSize="12sp"
+            android:fontFamily="@font/font_dm_sans" />
+
+    </LinearLayout>
+
+    <!-- Checkmark -->
+    <ImageView
+        android:id="@+id/iv_check"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_favorite"
+        android:tint="@color/gold_primary"
+        android:visibility="gone" />
+
+</LinearLayout>

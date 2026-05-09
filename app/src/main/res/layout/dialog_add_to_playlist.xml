@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/bg_card"
+    android:padding="20dp">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD TO PLAYLIST"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:fontFamily="@font/font_bebas"
+        android:letterSpacing="0.2"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tv_track_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Track Name — Artist"
+        android:textColor="@color/text_muted"
+        android:textSize="12sp"
+        android:fontFamily="@font/font_dm_sans"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Playlist List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_playlists"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Create New Playlist -->
+    <LinearLayout
+        android:id="@+id/ll_create_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_favorite"
+            android:layout_marginEnd="10dp"
+            android:tint="@color/purple_glow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create New Playlist"
+            android:textColor="@color/purple_glow"
+            android:textSize="14sp"
+            android:fontFamily="@font/font_space_grotesk"
+            android:fontWeight="600" />
+
+    </LinearLayout>
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:gap="8dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Cancel"
+            android:textColor="@color/text_muted"
+            android:backgroundTint="@color/bg_secondary"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Save ✦"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/purple_dark"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
