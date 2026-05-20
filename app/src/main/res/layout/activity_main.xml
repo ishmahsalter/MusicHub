@@ -17,6 +17,213 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
+    <!-- NOW PLAYING MINI CARD — di atas bottom nav -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_now_playing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="#33A855F7"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <!-- Track row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Album art mini -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="9dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/purple_deeper">
+
+                    <ImageView
+                        android:id="@+id/iv_np_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_music_note"
+                        android:scaleType="centerCrop"
+                        android:padding="8dp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Track info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_np_track"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Not Playing"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:maxLines="1"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:id="@+id/tv_np_artist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tap a track to play"
+                        android:textColor="#66FFFFFF"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/font_dm_sans"
+                        android:layout_marginTop="1dp" />
+
+                </LinearLayout>
+
+                <!-- HOT Badge -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HOT"
+                    android:textColor="@color/gold_primary"
+                    android:textSize="9sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_hot_badge"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:layout_marginStart="8dp" />
+
+            </LinearLayout>
+
+            <!-- Waveform -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="3dp">
+
+                <View android:layout_width="2dp" android:layout_height="8dp"
+                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="14dp"
+                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="17dp"
+                    android:background="#AAD4AF37" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="9dp"
+                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="12dp"
+                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="16dp"
+                    android:background="#AAD4AF37" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="6dp"
+                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="11dp"
+                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="15dp"
+                    android:background="#AAD4AF37" android:layout_marginEnd="2dp"/>
+                <View android:layout_width="2dp" android:layout_height="8dp"
+                    android:background="#88A855F7"/>
+
+            </LinearLayout>
+
+            <!-- Controls mini -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="4dp">
+
+                <ImageView
+                    android:id="@+id/btn_np_prev"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_skip_prev"
+                    android:padding="4dp"
+                    android:alpha="0.6"
+                    android:layout_marginEnd="12dp" />
+
+                <ImageView
+                    android:id="@+id/btn_np_play"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_pause"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_play_main_btn"
+                    android:layout_marginEnd="12dp" />
+
+                <ImageView
+                    android:id="@+id/btn_np_next"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_skip_next"
+                    android:padding="4dp"
+                    android:alpha="0.6"
+                    android:layout_marginEnd="12dp" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_repeat"
+                    android:padding="4dp"
+                    android:alpha="0.6" />
+
+            </LinearLayout>
+
+            <!-- Progress bar mini -->
+            <ProgressBar
+                android:id="@+id/pb_np"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:progressDrawable="@drawable/bg_progress_splash"
+                android:indeterminate="false"
+                android:progress="0"
+                android:layout_marginBottom="2dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0:00"
+                    android:textColor="#33FFFFFF"
+                    android:textSize="9sp"
+                    android:fontFamily="@font/font_dm_sans" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0:30"
+                    android:textColor="#33FFFFFF"
+                    android:textSize="9sp"
+                    android:fontFamily="@font/font_dm_sans" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <!-- Custom Bottom Nav -->
     <LinearLayout
         android:id="@+id/bottom_nav"
@@ -41,8 +248,7 @@
                 android:id="@+id/ic_nav_home"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/ic_home"
-                android:tint="@color/purple_glow" />
+                android:src="@drawable/ic_home" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,8 +273,7 @@
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/ic_search"
-                android:tint="@color/white" />
+                android:src="@drawable/ic_search" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,8 +313,7 @@
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/ic_heart"
-                android:tint="@color/white" />
+                android:src="@drawable/ic_heart" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,8 +338,7 @@
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/ic_profile"
-                android:tint="@color/white" />
+                android:src="@drawable/ic_profile" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,12 +1,14 @@
 package com.ishmah.musichub.model;
 
 public class Track {
-    private String name, artist, duration, albumArt, trackId, streamCount, url;
+    private String name, artist, duration, albumArt,
+            trackId, streamCount, url, previewUrl;
 
     public Track() {}
 
     public Track(String name, String artist, String duration,
-                 String albumArt, String trackId, String streamCount, String url) {
+                 String albumArt, String trackId,
+                 String streamCount, String url) {
         this.name = name;
         this.artist = artist;
         this.duration = duration;
@@ -14,6 +16,7 @@ public class Track {
         this.trackId = trackId;
         this.streamCount = streamCount;
         this.url = url;
+        this.previewUrl = "";
     }
 
     public String getName() { return name; }
@@ -23,6 +26,9 @@ public class Track {
     public String getTrackId() { return trackId; }
     public String getStreamCount() { return streamCount; }
     public String getUrl() { return url; }
+    public String getPreviewUrl() {
+        return previewUrl != null ? previewUrl : "";
+    }
 
     public void setName(String name) { this.name = name; }
     public void setArtist(String artist) { this.artist = artist; }
@@ -31,4 +37,5 @@ public class Track {
     public void setTrackId(String trackId) { this.trackId = trackId; }
     public void setStreamCount(String streamCount) { this.streamCount = streamCount; }
     public void setUrl(String url) { this.url = url; }
+    public void setPreviewUrl(String previewUrl) { this.previewUrl = previewUrl; }
 }

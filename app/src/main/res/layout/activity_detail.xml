@@ -234,7 +234,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_microphone"
-                android:tint="@color/purple_glow" />
+                app:tint="@color/purple_glow" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_playlist_add"
-                android:tint="@color/gold_primary" />
+                app:tint="@color/gold_primary" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -280,7 +280,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_vinyl"
-                android:tint="@color/purple_glow" />
+                app:tint="@color/purple_glow" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -303,7 +303,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_user_circle"
-                android:tint="@color/purple_glow" />
+                app:tint="@color/purple_glow" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -326,7 +326,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_share"
-                android:tint="#66FFFFFF" />
+                app:tint="#66FFFFFF" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -357,6 +357,7 @@
 
         <!-- Home -->
         <LinearLayout
+            android:id="@+id/nav_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -380,6 +381,7 @@
 
         <!-- Find -->
         <LinearLayout
+            android:id="@+id/nav_find"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -403,6 +405,7 @@
 
         <!-- FAB -->
         <ImageView
+            android:id="@+id/nav_fab"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_pause"
@@ -413,6 +416,7 @@
 
         <!-- Favs -->
         <LinearLayout
+            android:id="@+id/nav_favs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -436,6 +440,7 @@
 
         <!-- Me -->
         <LinearLayout
+            android:id="@+id/nav_me"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -120,6 +120,54 @@ public class PlaylistDao {
         return list;
     }
 
+    // Buat playlist baru secara sinkron (untuk background thread)
+    public long createPlaylistNow(String name, String coverType, String coverValue) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COL_PLAYLIST_NAME, name);
+        values.put(DatabaseHelper.COL_COVER_TYPE, coverType);
+        values.put(DatabaseHelper.COL_COVER_VALUE, coverValue);
+        values.put(DatabaseHelper.COL_CREATED_AT, String.valueOf(System.currentTimeMillis()));
+        return db.insert(DatabaseHelper.TABLE_PLAYLISTS, null, values);
+    }
+
+    // Ambil semua track di playlist (JOIN dengan favorites)
+    public List<Map<String, String>> getPlaylistTracks(int playlistId) {
+        List<Map<String, String>> list = new ArrayList<>();
+        String query = "SELECT f." + DatabaseHelper.COL_TRACK_ID +
+                ", f." + DatabaseHelper.COL_NAME +
+                ", f." + DatabaseHelper.COL_ARTIST +
+                ", f." + DatabaseHelper.COL_ALBUM_ART +
+                ", f." + DatabaseHelper.COL_DURATION +
+                " FROM " + DatabaseHelper.TABLE_FAVORITES + " f" +
+                " INNER JOIN " + DatabaseHelper.TABLE_PLAYLIST_TRACKS + " pt" +
+                " ON f." + DatabaseHelper.COL_TRACK_ID + " = pt." + DatabaseHelper.COL_PT_TRACK_ID +
+                " WHERE pt." + DatabaseHelper.COL_PT_PLAYLIST_ID + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(playlistId)});
+        while (cursor.moveToNext()) {
+            Map<String, String> map = new HashMap<>();
+            map.put("trackId", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_TRACK_ID)));
+            map.put("name", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_NAME)));
+            map.put("artist", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_ARTIST)));
+            map.put("albumArt", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_ALBUM_ART)));
+            map.put("duration", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_DURATION)));
+            list.add(map);
+        }
+        cursor.close();
+        return list;
+    }
+
+    // Update nama playlist
+    public void updatePlaylistName(int playlistId, String name, Runnable onDone) {
+        executor.execute(() -> {
+            ContentValues values = new ContentValues();
+            values.put(DatabaseHelper.COL_PLAYLIST_NAME, name);
+            db.update(DatabaseHelper.TABLE_PLAYLISTS, values,
+                    DatabaseHelper.COL_PLAYLIST_ID + " = ?",
+                    new String[]{String.valueOf(playlistId)});
+            if (onDone != null) onDone.run();
+        });
+    }
+
     // Hitung jumlah track di playlist
     public int getTrackCount(int playlistId) {
         Cursor cursor = db.query(DatabaseHelper.TABLE_PLAYLIST_TRACKS,

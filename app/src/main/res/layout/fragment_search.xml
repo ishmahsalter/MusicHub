@@ -5,61 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_primary"
-    android:padding="16dp">
+    android:background="@color/bg_primary">
 
-    <!-- Logo -->
+    <!-- Fixed header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="12dp">
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp">
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_musichub_logo"
-            android:scaleType="fitCenter"
-            android:layout_marginEnd="8dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Logo row -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MUSICHUB"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:fontFamily="@font/font_bebas"
-            android:letterSpacing="0.2" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_musichub_logo"
+                android:scaleType="fitCenter"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MUSICHUB"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:fontFamily="@font/font_bebas"
+                android:letterSpacing="0.2" />
+
+        </LinearLayout>
+
+        <!-- Search Input -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="4dp"
+            app:cardBackgroundColor="#15A855F7"
+            app:cardCornerRadius="11dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#33A855F7"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_search"
+                    android:layout_marginEnd="8dp" />
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Search tracks, artists..."
+                    android:textColorHint="@color/text_hint"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/font_dm_sans"
+                    android:background="@null"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
-    <!-- Search Input -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/bg_card"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="0dp">
-
-        <EditText
-            android:id="@+id/et_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Search tracks, artists..."
-            android:textColorHint="@color/text_hint"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:fontFamily="@font/font_dm_sans"
-            android:background="@null"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:singleLine="true" />
-
-    </androidx.cardview.widget.CardView>
 
     <!-- No Network -->
     <LinearLayout
@@ -69,16 +95,16 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"
-        android:layout_marginTop="32dp">
+        android:padding="32dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No internet connection"
             android:textColor="@color/text_muted"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:fontFamily="@font/font_dm_sans"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="10dp" />
 
         <Button
             android:id="@+id/btn_refresh"
@@ -90,9 +116,282 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_results"
+    <!-- Scrollable content -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- DISCOVERY sections (visible when not searching) -->
+            <LinearLayout
+                android:id="@+id/ll_discovery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="8dp">
+
+                <!-- CHARTS section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔥 CHARTS"
+                    android:textColor="@color/gold_primary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.2"
+                    android:paddingStart="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_charts"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- TOP ARTISTS section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎤 TOP ARTISTS"
+                    android:textColor="@color/gold_primary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.2"
+                    android:paddingStart="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_artists"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- GENRES section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💿 GENRES"
+                    android:textColor="@color/gold_primary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.2"
+                    android:paddingStart="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Genre chips row 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/chip_genre_pop"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Pop"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:gravity="center"
+                        android:background="@drawable/bg_chip_inactive"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/chip_genre_hiphop"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Hip-Hop"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:gravity="center"
+                        android:background="@drawable/bg_chip_inactive"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/chip_genre_rnb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="R&amp;B"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:gravity="center"
+                        android:background="@drawable/bg_chip_inactive"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/chip_genre_rock"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Rock"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:gravity="center"
+                        android:background="@drawable/bg_chip_inactive"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp" />
+
+                </LinearLayout>
+
+                <!-- Genre chips row 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/chip_genre_electronic"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Electronic"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:gravity="center"
+                        android:background="@drawable/bg_chip_inactive"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/chip_genre_jazz"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Jazz"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:gravity="center"
+                        android:background="@drawable/bg_chip_inactive"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/chip_genre_classical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Classical"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:gravity="center"
+                        android:background="@drawable/bg_chip_inactive"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/chip_genre_latin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Latin"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_space_grotesk"
+                        android:gravity="center"
+                        android:background="@drawable/bg_chip_inactive"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp" />
+
+                </LinearLayout>
+
+                <!-- NEW RELEASES section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✦ NEW RELEASES"
+                    android:textColor="@color/gold_primary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.2"
+                    android:paddingStart="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_new_releases"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:clipToPadding="false"
+                    android:layout_marginBottom="16dp" />
+
+            </LinearLayout>
+
+            <!-- RESULTS section (visible when searching) -->
+            <LinearLayout
+                android:id="@+id/ll_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:id="@+id/tv_search_section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔍 RESULTS"
+                    android:textColor="@color/gold_primary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.2"
+                    android:paddingStart="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_search_results"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:clipToPadding="false" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

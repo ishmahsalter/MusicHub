@@ -21,7 +21,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MusicHub">
 
-        <!-- SPLASH — Launcher utama -->
+        <!-- SPLASH -->
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true">
@@ -34,7 +34,8 @@
         <!-- MAIN -->
         <activity
             android:name=".activity.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
 
         <!-- DETAIL -->
         <activity
@@ -44,6 +45,26 @@
         <!-- ARTIST -->
         <activity
             android:name=".activity.ArtistActivity"
+            android:exported="false" />
+
+        <!-- LYRICS -->
+        <activity
+            android:name=".activity.LyricsActivity"
+            android:exported="false" />
+
+        <!-- EDIT PROFILE -->
+        <activity
+            android:name=".activity.EditProfileActivity"
+            android:exported="false" />
+
+        <!-- ALBUM -->
+        <activity
+            android:name=".activity.AlbumActivity"
+            android:exported="false" />
+
+        <!-- PLAYLIST DETAIL -->
+        <activity
+            android:name=".activity.PlaylistDetailActivity"
             android:exported="false" />
 
     </application>

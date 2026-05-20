@@ -52,6 +52,9 @@ dependencies {
     // Circle Image View
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    // ViewPager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

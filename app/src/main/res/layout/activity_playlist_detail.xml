@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_primary">
+
+    <!-- Hero cover section -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+
+        <!-- Cover image / gradient background -->
+        <ImageView
+            android:id="@+id/iv_cover_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@color/purple_deeper" />
+
+        <!-- Dark overlay for readability -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_overlay_bottom" />
+
+        <!-- Back button -->
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
+
+        <!-- Bottom info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_playlist_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Playlist"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:fontFamily="@font/font_bebas"
+                android:letterSpacing="0.05"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/tv_playlist_meta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0 tracks"
+                android:textColor="#CCFFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Action row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <Button
+            android:id="@+id/btn_play_all"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="▶  PLAY ALL"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/font_bebas"
+            android:letterSpacing="0.1"
+            android:backgroundTint="@color/purple_dark"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/btn_shuffle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_shuffle"
+            android:padding="6dp"
+            android:alpha="0.6"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/btn_edit_cover"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_edit"
+            android:padding="6dp"
+            android:alpha="0.6"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_delete"
+            android:padding="6dp"
+            android:alpha="0.6"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#0DFFFFFF"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Tracks label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRACKS"
+        android:textColor="@color/gold_primary"
+        android:textSize="11sp"
+        android:fontFamily="@font/font_bebas"
+        android:letterSpacing="0.2"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Remaining space: empty state + list -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Empty state -->
+        <LinearLayout
+            android:id="@+id/ll_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This playlist is empty"
+                android:textColor="@color/text_muted"
+                android:textSize="15sp"
+                android:fontFamily="@font/font_space_grotesk"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add songs by tapping ＋ on any track"
+                android:textColor="@color/text_hint"
+                android:textSize="12sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- Track list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_playlist_tracks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="4dp"
+            android:clipToPadding="false"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>

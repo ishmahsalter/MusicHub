@@ -9,91 +9,113 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Logo -->
+        <!-- App bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="16dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp">
 
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@drawable/ic_musichub_logo"
                 android:scaleType="fitCenter"
                 android:layout_marginEnd="8dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="MUSICHUB"
                 android:textColor="@color/text_primary"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:fontFamily="@font/font_bebas"
                 android:letterSpacing="0.2" />
 
+            <ImageView
+                android:id="@+id/btn_settings"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_settings"
+                android:padding="2dp"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
         </LinearLayout>
 
-        <!-- Banner -->
-        <androidx.cardview.widget.CardView
+        <!-- Hero banner -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginBottom="0dp"
-            app:cardBackgroundColor="@color/purple_deeper"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="0dp" />
+            android:layout_height="150dp">
 
-        <!-- Avatar -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_hero_gradient" />
+
+        </FrameLayout>
+
+        <!-- Avatar (overlapping banner) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="-28dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginTop="-44dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_avatar"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
                 android:src="@drawable/ic_profile"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/purple_primary" />
+                app:civ_border_width="3dp"
+                app:civ_border_color="@color/bg_primary" />
 
         </LinearLayout>
 
-        <!-- Name -->
+        <!-- Username -->
         <TextView
             android:id="@+id/tv_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="MusicHub User"
             android:textColor="@color/text_primary"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:fontFamily="@font/font_bebas"
-            android:letterSpacing="0.1"
-            android:gravity="center" />
+            android:letterSpacing="0.05"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
 
+        <!-- Bio -->
         <TextView
             android:id="@+id/tv_bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your music, your universe 🎵"
+            android:text="Your music, your universe"
             android:textColor="@color/text_muted"
             android:textSize="13sp"
             android:fontFamily="@font/font_dm_sans"
             android:gravity="center"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp" />
 
-        <!-- Stats -->
+        <!-- Stats row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="12dp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -105,17 +127,17 @@
                 android:padding="10dp"
                 android:layout_marginEnd="4dp">
                 <TextView
-                    android:id="@+id/tv_followers"
+                    android:id="@+id/tv_liked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1.2K"
-                    android:textColor="@color/purple_glow"
-                    android:textSize="18sp"
+                    android:text="0"
+                    android:textColor="@color/gold_primary"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_bebas" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Followers"
+                    android:text="Liked"
                     android:textColor="@color/text_muted"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_dm_sans" />
@@ -132,17 +154,17 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp">
                 <TextView
-                    android:id="@+id/tv_following"
+                    android:id="@+id/tv_playlist_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="@color/purple_glow"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_bebas" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Following"
+                    android:text="Playlists"
                     android:textColor="@color/text_muted"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_dm_sans" />
@@ -158,17 +180,17 @@
                 android:padding="10dp"
                 android:layout_marginStart="4dp">
                 <TextView
-                    android:id="@+id/tv_liked"
+                    android:id="@+id/tv_following"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textColor="@color/gold_primary"
-                    android:textSize="18sp"
+                    android:textColor="@color/purple_glow"
+                    android:textSize="20sp"
                     android:fontFamily="@font/font_bebas" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Liked"
+                    android:text="Following"
                     android:textColor="@color/text_muted"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_dm_sans" />
@@ -176,7 +198,129 @@
 
         </LinearLayout>
 
-        <!-- Edit Profile Button -->
+        <!-- Listening time card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_card_glass"
+            android:padding="14dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_clock"
+                android:layout_marginEnd="12dp"
+                app:tint="@color/gold_primary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TOTAL LISTENING TIME"
+                    android:textColor="@color/gold_primary"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.2" />
+
+                <TextView
+                    android:id="@+id/tv_listen_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 min"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- MY PLAYLISTS header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="12dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="MY PLAYLISTS"
+                android:textColor="@color/gold_primary"
+                android:textSize="13sp"
+                android:fontFamily="@font/font_bebas"
+                android:letterSpacing="0.2" />
+
+            <TextView
+                android:id="@+id/tv_new_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ NEW"
+                android:textColor="@color/purple_glow"
+                android:textSize="13sp"
+                android:fontFamily="@font/font_space_grotesk"
+                android:padding="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+        </LinearLayout>
+
+        <!-- Empty playlists -->
+        <LinearLayout
+            android:id="@+id/ll_no_playlists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No playlists yet"
+                android:textColor="@color/text_muted"
+                android:textSize="14sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tap + NEW to create your first playlist"
+                android:textColor="@color/text_hint"
+                android:textSize="12sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- Playlists grid (2 columns) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_playlists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clipToPadding="false"
+            android:visibility="gone" />
+
+        <!-- Edit Profile button -->
         <Button
             android:id="@+id/btn_edit_profile"
             android:layout_width="match_parent"
@@ -185,7 +329,8 @@
             android:textColor="@color/purple_glow"
             android:fontFamily="@font/font_space_grotesk"
             android:backgroundTint="@color/bg_card"
-            android:layout_marginBottom="16dp" />
+            android:layout_margin="16dp"
+            android:layout_marginBottom="32dp" />
 
     </LinearLayout>
 

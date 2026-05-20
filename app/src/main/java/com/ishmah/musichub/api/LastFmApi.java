@@ -44,4 +44,27 @@ public interface LastFmApi {
             @Query("artist") String artist,
             @Query("limit") int limit
     );
+
+    // Top Tracks by Genre Tag
+    @GET("?method=tag.gettoptracks&format=json")
+    Call<JsonObject> getTagTopTracks(
+            @Query("api_key") String apiKey,
+            @Query("tag") String tag,
+            @Query("limit") int limit
+    );
+
+    // Album Info
+    @GET("?method=album.getinfo&format=json")
+    Call<JsonObject> getAlbumInfo(
+            @Query("api_key") String apiKey,
+            @Query("album") String album,
+            @Query("artist") String artist
+    );
+
+    // Top Artists
+    @GET("?method=chart.gettopartists&format=json")
+    Call<JsonObject> getTopArtists(
+            @Query("api_key") String apiKey,
+            @Query("limit") int limit
+    );
 }

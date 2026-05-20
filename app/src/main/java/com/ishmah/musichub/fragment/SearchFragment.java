@@ -1,6 +1,9 @@
 package com.ishmah.musichub.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextWatcher;
+import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,18 +21,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.ishmah.musichub.R;
+import com.ishmah.musichub.activity.ArtistActivity;
+import com.ishmah.musichub.adapter.ArtistChipAdapter;
+import com.ishmah.musichub.adapter.ChartCardAdapter;
 import com.ishmah.musichub.adapter.TrackAdapter;
 import com.ishmah.musichub.api.ApiConfig;
 import com.ishmah.musichub.api.DeezerApi;
 import com.ishmah.musichub.api.LastFmApi;
 import com.ishmah.musichub.api.NetworkChecker;
 import com.ishmah.musichub.api.RetrofitClient;
-import com.ishmah.musichub.db.CachedImageDao;
 import com.ishmah.musichub.model.Track;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,15 +42,29 @@ import retrofit2.Response;
 public class SearchFragment extends Fragment {
 
     private EditText etSearch;
-    private RecyclerView rvSearchResults;
-    private LinearLayout llNoNetwork;
+    private RecyclerView rvSearchResults, rvCharts, rvArtists, rvNewReleases;
+    private LinearLayout llNoNetwork, llDiscovery, llResults;
     private Button btnRefresh;
-    private TrackAdapter trackAdapter;
-    private List<Track> trackList = new ArrayList<>();
+    private TextView tvSearchSection;
+
+    // Search results
+    private TrackAdapter searchAdapter;
+    private List<Track> searchList = new ArrayList<>();
+
+    // Charts
+    private ChartCardAdapter chartAdapter;
+    private List<Track> chartList = new ArrayList<>();
+
+    // Artists
+    private ArtistChipAdapter artistAdapter;
+    private List<Map<String, String>> artistList = new ArrayList<>();
+
+    // New Releases
+    private TrackAdapter releasesAdapter;
+    private List<Track> releasesList = new ArrayList<>();
+
     private LastFmApi lastFmApi;
     private DeezerApi deezerApi;
-    private CachedImageDao cachedImageDao;
-    private ExecutorService executor = Executors.newFixedThreadPool(4);
     private String lastQuery = "";
 
     @Nullable
@@ -61,151 +81,410 @@ public class SearchFragment extends Fragment {
 
         etSearch = view.findViewById(R.id.et_search);
         rvSearchResults = view.findViewById(R.id.rv_search_results);
+        rvCharts = view.findViewById(R.id.rv_charts);
+        rvArtists = view.findViewById(R.id.rv_artists);
+        rvNewReleases = view.findViewById(R.id.rv_new_releases);
         llNoNetwork = view.findViewById(R.id.ll_no_network);
+        llDiscovery = view.findViewById(R.id.ll_discovery);
+        llResults = view.findViewById(R.id.ll_results);
         btnRefresh = view.findViewById(R.id.btn_refresh);
-
-        trackAdapter = new TrackAdapter(requireContext(), trackList);
-        rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvSearchResults.setAdapter(trackAdapter);
+        tvSearchSection = view.findViewById(R.id.tv_search_section);
 
         lastFmApi = RetrofitClient.getLastFmInstance().create(LastFmApi.class);
         deezerApi = RetrofitClient.getDeezerInstance().create(DeezerApi.class);
-        cachedImageDao = new CachedImageDao(requireContext());
 
-        // Search on keyboard search button
+        // Search results adapter
+        searchAdapter = new TrackAdapter(requireContext(), searchList);
+        rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvSearchResults.setAdapter(searchAdapter);
+
+        // Charts adapter (horizontal)
+        chartAdapter = new ChartCardAdapter(requireContext(), chartList);
+        LinearLayoutManager chartsLM = new LinearLayoutManager(
+                getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rvCharts.setLayoutManager(chartsLM);
+        rvCharts.setAdapter(chartAdapter);
+
+        // Artists adapter (horizontal)
+        artistAdapter = new ArtistChipAdapter(requireContext(), artistList);
+        LinearLayoutManager artistsLM = new LinearLayoutManager(
+                getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rvArtists.setLayoutManager(artistsLM);
+        rvArtists.setAdapter(artistAdapter);
+
+        // New Releases adapter
+        releasesAdapter = new TrackAdapter(requireContext(), releasesList);
+        rvNewReleases.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvNewReleases.setAdapter(releasesAdapter);
+
+        // Genre chips
+        setupGenreChips(view);
+
+        // Search input
         etSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                     (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                String query = etSearch.getText().toString().trim();
-                if (!query.isEmpty()) {
-                    lastQuery = query;
-                    searchTracks(query);
-                }
+                String q = etSearch.getText().toString().trim();
+                if (!q.isEmpty()) { lastQuery = q; performSearch(q); }
                 return true;
             }
             return false;
         });
 
-        // Refresh button
-        btnRefresh.setOnClickListener(v -> {
-            if (!lastQuery.isEmpty()) {
-                searchTracks(lastQuery);
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String q = s.toString().trim();
+                if (q.length() >= 2) {
+                    lastQuery = q;
+                    showMode(false);
+                    performSearch(q);
+                } else if (q.isEmpty()) {
+                    showMode(true);
+                }
             }
+            @Override public void afterTextChanged(Editable s) {}
         });
+
+        btnRefresh.setOnClickListener(v -> {
+            showNoNetwork(false);
+            if (!lastQuery.isEmpty()) performSearch(lastQuery);
+            else loadDiscovery();
+        });
+
+        loadDiscovery();
     }
 
-    private void searchTracks(String query) {
+    private void showMode(boolean discovery) {
+        llDiscovery.setVisibility(discovery ? View.VISIBLE : View.GONE);
+        llResults.setVisibility(discovery ? View.GONE : View.VISIBLE);
+    }
+
+    private void setupGenreChips(View view) {
+        int[] chipIds = {
+                R.id.chip_genre_pop, R.id.chip_genre_hiphop,
+                R.id.chip_genre_rnb, R.id.chip_genre_rock,
+                R.id.chip_genre_electronic, R.id.chip_genre_jazz,
+                R.id.chip_genre_classical, R.id.chip_genre_latin
+        };
+        String[] tags = {
+                "pop", "hip hop", "rnb", "rock",
+                "electronic", "jazz", "classical", "latin"
+        };
+        String[] labels = {
+                "Pop", "Hip-Hop", "R&B", "Rock",
+                "Electronic", "Jazz", "Classical", "Latin"
+        };
+
+        for (int i = 0; i < chipIds.length; i++) {
+            final String tag = tags[i];
+            final String label = labels[i];
+            TextView chip = view.findViewById(chipIds[i]);
+            chip.setOnClickListener(v -> {
+                etSearch.setText(label);
+                etSearch.clearFocus();
+                showMode(false);
+                tvSearchSection.setText("💿 " + label.toUpperCase());
+                searchByGenre(tag);
+            });
+        }
+    }
+
+    private void loadDiscovery() {
+        if (!NetworkChecker.isConnected(requireContext())) {
+            showNoNetwork(true);
+            return;
+        }
+        showNoNetwork(false);
+        showMode(true);
+        loadCharts();
+        loadTopArtists();
+        loadNewReleases();
+    }
+
+    private void loadCharts() {
+        lastFmApi.getTopTracks(ApiConfig.LASTFM_API_KEY, 10)
+                .enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        if (!response.isSuccessful() || response.body() == null) return;
+                        try {
+                            JsonArray tracks = response.body()
+                                    .getAsJsonObject("tracks").getAsJsonArray("track");
+                            chartList.clear();
+                            for (int i = 0; i < tracks.size(); i++) {
+                                JsonObject t = tracks.get(i).getAsJsonObject();
+                                String name = t.get("name").getAsString();
+                                String artist = t.getAsJsonObject("artist").get("name").getAsString();
+                                String plays = t.has("playcount") ? t.get("playcount").getAsString() : "";
+                                Track track = new Track(name, artist, "0:30",
+                                        "", name + artist, plays, "");
+                                chartList.add(track);
+                            }
+                            if (getActivity() != null) {
+                                getActivity().runOnUiThread(() -> chartAdapter.notifyDataSetChanged());
+                            }
+                            fetchDeezerForCharts();
+                        } catch (Exception ignored) {}
+                    }
+                    @Override public void onFailure(Call<JsonObject> call, Throwable t) {}
+                });
+    }
+
+    private void fetchDeezerForCharts() {
+        for (int i = 0; i < chartList.size(); i++) {
+            final int idx = i;
+            final Track track = chartList.get(i);
+            deezerApi.searchTrack(track.getName() + " " + track.getArtist())
+                    .enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            if (!response.isSuccessful() || response.body() == null) return;
+                            try {
+                                JsonArray data = response.body().getAsJsonArray("data");
+                                if (data == null || data.size() == 0) return;
+                                JsonObject first = data.get(0).getAsJsonObject();
+                                if (first.has("album")) {
+                                    String art = first.getAsJsonObject("album")
+                                            .get("cover_xl").getAsString();
+                                    track.setAlbumArt(art);
+                                }
+                                if (first.has("preview")) track.setPreviewUrl(first.get("preview").getAsString());
+                                if (getActivity() != null) {
+                                    getActivity().runOnUiThread(() -> chartAdapter.notifyItemChanged(idx));
+                                }
+                            } catch (Exception ignored) {}
+                        }
+                        @Override public void onFailure(Call<JsonObject> call, Throwable t) {}
+                    });
+        }
+    }
+
+    private void loadTopArtists() {
+        lastFmApi.getTopArtists(ApiConfig.LASTFM_API_KEY, 12)
+                .enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        if (!response.isSuccessful() || response.body() == null) return;
+                        try {
+                            JsonArray artists = response.body()
+                                    .getAsJsonObject("artists").getAsJsonArray("artist");
+                            artistList.clear();
+                            for (int i = 0; i < artists.size(); i++) {
+                                JsonObject a = artists.get(i).getAsJsonObject();
+                                String name = a.get("name").getAsString();
+                                Map<String, String> map = new HashMap<>();
+                                map.put("name", name);
+                                map.put("photo", "");
+                                artistList.add(map);
+                            }
+                            if (getActivity() != null) {
+                                getActivity().runOnUiThread(() -> artistAdapter.notifyDataSetChanged());
+                            }
+                            fetchDeezerForArtists();
+                        } catch (Exception ignored) {}
+                    }
+                    @Override public void onFailure(Call<JsonObject> call, Throwable t) {}
+                });
+    }
+
+    private void fetchDeezerForArtists() {
+        for (int i = 0; i < artistList.size(); i++) {
+            final int idx = i;
+            final Map<String, String> artist = artistList.get(i);
+            deezerApi.searchArtist(artist.get("name"))
+                    .enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            if (!response.isSuccessful() || response.body() == null) return;
+                            try {
+                                JsonArray data = response.body().getAsJsonArray("data");
+                                if (data == null || data.size() == 0) return;
+                                JsonObject first = data.get(0).getAsJsonObject();
+                                if (first.has("picture_medium")) {
+                                    artist.put("photo", first.get("picture_medium").getAsString());
+                                }
+                                if (getActivity() != null) {
+                                    getActivity().runOnUiThread(() -> artistAdapter.notifyItemChanged(idx));
+                                }
+                            } catch (Exception ignored) {}
+                        }
+                        @Override public void onFailure(Call<JsonObject> call, Throwable t) {}
+                    });
+        }
+    }
+
+    private void loadNewReleases() {
+        lastFmApi.getTopTracks(ApiConfig.LASTFM_API_KEY, 15)
+                .enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        if (!response.isSuccessful() || response.body() == null) return;
+                        try {
+                            JsonArray tracks = response.body()
+                                    .getAsJsonObject("tracks").getAsJsonArray("track");
+                            // Use tracks 10-25 to differentiate from charts
+                            releasesList.clear();
+                            for (int i = 0; i < tracks.size(); i++) {
+                                JsonObject t = tracks.get(i).getAsJsonObject();
+                                String name = t.get("name").getAsString();
+                                String artist = t.getAsJsonObject("artist").get("name").getAsString();
+                                releasesList.add(new Track(name, artist, "0:30",
+                                        "", name + artist, "", ""));
+                            }
+                            if (getActivity() != null) {
+                                getActivity().runOnUiThread(() -> releasesAdapter.notifyDataSetChanged());
+                            }
+                            fetchDeezerForReleases();
+                        } catch (Exception ignored) {}
+                    }
+                    @Override public void onFailure(Call<JsonObject> call, Throwable t) {}
+                });
+    }
+
+    private void fetchDeezerForReleases() {
+        for (int i = 0; i < releasesList.size(); i++) {
+            final int idx = i;
+            final Track track = releasesList.get(i);
+            deezerApi.searchTrack(track.getName() + " " + track.getArtist())
+                    .enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            if (!response.isSuccessful() || response.body() == null) return;
+                            try {
+                                JsonArray data = response.body().getAsJsonArray("data");
+                                if (data == null || data.size() == 0) return;
+                                JsonObject first = data.get(0).getAsJsonObject();
+                                if (first.has("album")) {
+                                    track.setAlbumArt(first.getAsJsonObject("album")
+                                            .get("cover_xl").getAsString());
+                                }
+                                if (first.has("preview")) track.setPreviewUrl(first.get("preview").getAsString());
+                                if (first.has("duration")) {
+                                    int dur = first.get("duration").getAsInt();
+                                    track.setDuration(String.format("%d:%02d", dur / 60, dur % 60));
+                                }
+                                if (getActivity() != null) {
+                                    getActivity().runOnUiThread(() -> releasesAdapter.notifyItemChanged(idx));
+                                }
+                            } catch (Exception ignored) {}
+                        }
+                        @Override public void onFailure(Call<JsonObject> call, Throwable t) {}
+                    });
+        }
+    }
+
+    private void performSearch(String query) {
+        if (!NetworkChecker.isConnected(requireContext())) {
+            showNoNetwork(true);
+            return;
+        }
+        showNoNetwork(false);
+        tvSearchSection.setText("🔍 RESULTS FOR \"" + query.toUpperCase() + "\"");
+
+        lastFmApi.searchTrack(ApiConfig.LASTFM_API_KEY, query, 20)
+                .enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        if (!response.isSuccessful() || response.body() == null) return;
+                        parseSearchResults(response.body());
+                    }
+                    @Override public void onFailure(Call<JsonObject> call, Throwable t) {
+                        showNoNetwork(true);
+                    }
+                });
+    }
+
+    private void searchByGenre(String tag) {
         if (!NetworkChecker.isConnected(requireContext())) {
             showNoNetwork(true);
             return;
         }
         showNoNetwork(false);
 
-        lastFmApi.searchTrack(ApiConfig.LASTFM_API_KEY, query, ApiConfig.DEFAULT_LIMIT)
+        lastFmApi.getTagTopTracks(ApiConfig.LASTFM_API_KEY, tag, 20)
                 .enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            parseSearchResults(response.body());
-                        }
+                        if (!response.isSuccessful() || response.body() == null) return;
+                        try {
+                            JsonArray tracks = response.body()
+                                    .getAsJsonObject("tracks").getAsJsonArray("track");
+                            searchList.clear();
+                            for (int i = 0; i < tracks.size(); i++) {
+                                JsonObject t = tracks.get(i).getAsJsonObject();
+                                String name = t.get("name").getAsString();
+                                String artist = t.getAsJsonObject("artist").get("name").getAsString();
+                                searchList.add(new Track(name, artist, "0:30",
+                                        "", name + artist, "", ""));
+                            }
+                            if (getActivity() != null) {
+                                getActivity().runOnUiThread(() -> searchAdapter.updateList(searchList));
+                            }
+                            fetchDeezerForSearch();
+                        } catch (Exception ignored) {}
                     }
-
-                    @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                    @Override public void onFailure(Call<JsonObject> call, Throwable t) {
                         showNoNetwork(true);
                     }
                 });
     }
 
     private void parseSearchResults(JsonObject json) {
-        trackList.clear();
+        searchList.clear();
         try {
             JsonObject results = json.getAsJsonObject("results");
             JsonObject trackMatches = results.getAsJsonObject("trackmatches");
             JsonArray tracks = trackMatches.getAsJsonArray("track");
-
             for (int i = 0; i < tracks.size(); i++) {
                 JsonObject t = tracks.get(i).getAsJsonObject();
                 String name = t.get("name").getAsString();
                 String artist = t.get("artist").getAsString();
-
-                Track track = new Track(name, artist, "", "", name + artist, "", "");
-                trackList.add(track);
+                searchList.add(new Track(name, artist, "0:30", "", name + artist, "", ""));
             }
-
             if (getActivity() != null) {
-                getActivity().runOnUiThread(() -> trackAdapter.updateList(trackList));
+                getActivity().runOnUiThread(() -> searchAdapter.updateList(searchList));
             }
-
-            // Fetch album art dari Deezer
-            for (int i = 0; i < trackList.size(); i++) {
-                final int index = i;
-                final Track track = trackList.get(i);
-                String cacheKey = track.getName() + track.getArtist();
-
-                executor.execute(() -> {
-                    var cached = cachedImageDao.getCache(cacheKey);
-                    if (cached != null && cached.get("cover_url") != null
-                            && !cached.get("cover_url").isEmpty()) {
-                        track.setAlbumArt(cached.get("cover_url"));
-                        if (getActivity() != null) {
-                            getActivity().runOnUiThread(() ->
-                                    trackAdapter.notifyItemChanged(index));
-                        }
-                    } else {
-                        fetchAlbumArtFromDeezer(track, index, cacheKey);
-                    }
-                });
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            fetchDeezerForSearch();
+        } catch (Exception ignored) {}
     }
 
-    private void fetchAlbumArtFromDeezer(Track track, int index, String cacheKey) {
-        String query = track.getName() + " " + track.getArtist();
-        deezerApi.searchTrack(query).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    try {
-                        JsonArray data = response.body().getAsJsonArray("data");
-                        if (data != null && data.size() > 0) {
-                            JsonObject first = data.get(0).getAsJsonObject();
-                            String coverUrl = "";
-                            if (first.has("album")) {
-                                JsonObject album = first.getAsJsonObject("album");
-                                if (album.has("cover_xl")) {
-                                    coverUrl = album.get("cover_xl").getAsString();
+    private void fetchDeezerForSearch() {
+        for (int i = 0; i < searchList.size(); i++) {
+            final int idx = i;
+            final Track track = searchList.get(i);
+            deezerApi.searchTrack(track.getName() + " " + track.getArtist())
+                    .enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            if (!response.isSuccessful() || response.body() == null) return;
+                            try {
+                                JsonArray data = response.body().getAsJsonArray("data");
+                                if (data == null || data.size() == 0) return;
+                                JsonObject first = data.get(0).getAsJsonObject();
+                                if (first.has("album")) {
+                                    track.setAlbumArt(first.getAsJsonObject("album")
+                                            .get("cover_xl").getAsString());
                                 }
-                            }
-                            if (!coverUrl.isEmpty()) {
-                                final String finalUrl = coverUrl;
-                                track.setAlbumArt(finalUrl);
-                                cachedImageDao.saveCache(cacheKey, finalUrl, "", null);
+                                if (first.has("preview")) track.setPreviewUrl(first.get("preview").getAsString());
+                                if (first.has("duration")) {
+                                    int dur = first.get("duration").getAsInt();
+                                    track.setDuration(String.format("%d:%02d", dur / 60, dur % 60));
+                                }
                                 if (getActivity() != null) {
-                                    getActivity().runOnUiThread(() ->
-                                            trackAdapter.notifyItemChanged(index));
+                                    getActivity().runOnUiThread(() -> searchAdapter.notifyItemChanged(idx));
                                 }
-                            }
+                            } catch (Exception ignored) {}
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {}
-        });
+                        @Override public void onFailure(Call<JsonObject> call, Throwable t) {}
+                    });
+        }
     }
 
     private void showNoNetwork(boolean show) {
         if (getActivity() == null) return;
-        getActivity().runOnUiThread(() -> {
-            llNoNetwork.setVisibility(show ? View.VISIBLE : View.GONE);
-            rvSearchResults.setVisibility(show ? View.GONE : View.VISIBLE);
-        });
+        getActivity().runOnUiThread(() ->
+                llNoNetwork.setVisibility(show ? View.VISIBLE : View.GONE));
     }
 }

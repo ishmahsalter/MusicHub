@@ -52,7 +52,7 @@
             android:layout_height="20dp"
             android:src="@drawable/ic_playlist_add"
             android:layout_marginEnd="10dp"
-            android:tint="@color/purple_glow" />
+            app:tint="@color/purple_glow" />
 
         <TextView
             android:layout_width="wrap_content"

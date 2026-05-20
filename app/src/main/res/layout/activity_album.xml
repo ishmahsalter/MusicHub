@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_primary">
+
+    <!-- Hero Banner -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <!-- Background art -->
+        <ImageView
+            android:id="@+id/iv_album_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@color/purple_deeper" />
+
+        <!-- Gradient overlay -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_gradient_purple" />
+
+        <!-- Back button -->
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
+
+        <!-- "ALBUM" label top center -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="18dp"
+            android:text="ALBUM"
+            android:textColor="#66FFFFFF"
+            android:textSize="11sp"
+            android:fontFamily="@font/font_bebas"
+            android:letterSpacing="0.3" />
+
+        <!-- Bottom info overlay -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
+
+            <!-- Album cover thumbnail -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginEnd="14dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_album_art"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/purple_subtle"
+                    android:scaleType="centerCrop" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Album info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_album_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Album Name"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.05"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/tv_album_artist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Artist Name"
+                    android:textColor="#CCE9D5FF"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/font_dm_sans"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/tv_album_meta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Studio Album · — · — tracks"
+                    android:textColor="#66FFFFFF"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_dm_sans"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Action Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
+
+        <Button
+            android:id="@+id/btn_play_all"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="▶  PLAY ALL"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/font_bebas"
+            android:letterSpacing="0.1"
+            android:backgroundTint="@color/purple_dark"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp" />
+
+        <Space android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/btn_like"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_heart"
+            android:padding="6dp"
+            android:alpha="0.5"
+            android:layout_marginStart="8dp" />
+
+        <ImageView
+            android:id="@+id/btn_add"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_playlist_add"
+            android:padding="6dp"
+            android:alpha="0.5"
+            android:layout_marginStart="4dp" />
+
+        <ImageView
+            android:id="@+id/btn_share"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_share"
+            android:padding="6dp"
+            android:alpha="0.5"
+            android:layout_marginStart="4dp" />
+
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#0DFFFFFF"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Tracklist header -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRACKLIST"
+        android:textColor="@color/gold_primary"
+        android:textSize="11sp"
+        android:fontFamily="@font/font_bebas"
+        android:letterSpacing="0.2"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="6dp" />
+
+    <!-- No network -->
+    <LinearLayout
+        android:id="@+id/ll_no_network"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Could not load album"
+            android:textColor="@color/text_muted"
+            android:textSize="13sp"
+            android:fontFamily="@font/font_dm_sans" />
+
+    </LinearLayout>
+
+    <!-- Track list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tracks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:clipToPadding="false" />
+
+</LinearLayout>

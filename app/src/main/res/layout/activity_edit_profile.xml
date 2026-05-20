@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_back"
+                android:padding="4dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EDIT PROFILE"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:fontFamily="@font/font_bebas"
+                android:letterSpacing="0.2"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+        <!-- Avatar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="24dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_profile"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/purple_primary"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gallery"
+                    android:textColor="@color/purple_glow"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_inactive"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/btn_delete_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remove"
+                    android:textColor="@color/error"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_inactive"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- USERNAME label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USERNAME"
+            android:textColor="@color/gold_primary"
+            android:textSize="10sp"
+            android:fontFamily="@font/font_bebas"
+            android:letterSpacing="0.2"
+            android:layout_marginBottom="6dp" />
+
+        <!-- Username field -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#15A855F7"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#33A855F7"
+            app:strokeWidth="1dp">
+
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter username..."
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="14sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:background="@null"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:inputType="text"
+                android:maxLines="1" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- BIO label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BIO"
+            android:textColor="@color/gold_primary"
+            android:textSize="10sp"
+            android:fontFamily="@font/font_bebas"
+            android:letterSpacing="0.2"
+            android:layout_marginBottom="6dp" />
+
+        <!-- Bio field -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="#15A855F7"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#33A855F7"
+            app:strokeWidth="1dp">
+
+            <EditText
+                android:id="@+id/et_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Write something about yourself..."
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="14sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:background="@null"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:gravity="top" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- TEMA label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TEMA"
+            android:textColor="@color/gold_primary"
+            android:textSize="10sp"
+            android:fontFamily="@font/font_bebas"
+            android:letterSpacing="0.2"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Theme chips -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:id="@+id/ll_theme_chips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chip_theme_purple"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✦ Aurora"
+                    android:textColor="#E9D5FF"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_active"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chip_theme_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Midnight"
+                    android:textColor="#66FFFFFF"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_inactive"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chip_theme_gold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gold Rush"
+                    android:textColor="#66FFFFFF"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_inactive"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <!-- NOTIFIKASI label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NOTIFIKASI"
+            android:textColor="@color/gold_primary"
+            android:textSize="10sp"
+            android:fontFamily="@font/font_bebas"
+            android:letterSpacing="0.2"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Notification toggle row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_card_glass"
+            android:padding="14dp"
+            android:layout_marginBottom="32dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="New release alerts"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:fontFamily="@font/font_dm_sans" />
+
+            <Switch
+                android:id="@+id/sw_notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:thumbTint="@color/purple_primary"
+                android:trackTint="#44A855F7" />
+
+        </LinearLayout>
+
+        <!-- SAVE button -->
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="SAVE"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/font_bebas"
+            android:letterSpacing="0.2"
+            android:backgroundTint="@color/purple_dark" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

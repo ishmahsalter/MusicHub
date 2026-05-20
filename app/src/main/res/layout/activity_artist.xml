@@ -34,7 +34,7 @@
                     android:layout_margin="16dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_back"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <TextView
                     android:id="@+id/tv_artist_name"
@@ -141,7 +141,7 @@
                     android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@android:drawable/star_off"
-                    android:tint="@color/gold_primary" />
+                    app:tint="@color/gold_primary" />
 
                 <ImageButton
                     android:id="@+id/btn_share"
@@ -150,7 +150,7 @@
                     android:layout_marginStart="16dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@android:drawable/ic_menu_share"
-                    android:tint="@color/text_secondary" />
+                    app:tint="@color/text_secondary" />
 
             </LinearLayout>
 

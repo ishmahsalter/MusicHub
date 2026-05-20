@@ -64,15 +64,15 @@ public class AddToPlaylistDialog extends DialogFragment {
         TextView tvTrackInfo = view.findViewById(R.id.tv_track_info);
         tvTrackInfo.setText(trackName + " — " + artistName);
 
-        // Load playlists
-        loadPlaylists();
-
-        // Setup RecyclerView
+        // Setup RecyclerView FIRST so adapter is ready before loadPlaylists runs
         RecyclerView rvPlaylists = view.findViewById(R.id.rv_playlists);
         adapter = new PlaylistDialogAdapter(requireContext(), playlists,
                 (position, playlist) -> {});
         rvPlaylists.setLayoutManager(new LinearLayoutManager(requireContext()));
         rvPlaylists.setAdapter(adapter);
+
+        // Load playlists on background thread AFTER adapter is set up
+        loadPlaylists();
 
         // Create new playlist
         LinearLayout llCreateNew = view.findViewById(R.id.ll_create_new);
@@ -110,27 +110,32 @@ public class AddToPlaylistDialog extends DialogFragment {
     }
 
     private void loadPlaylists() {
-        playlists.clear();
-        List<Map<String, String>> raw = playlistDao.getAllPlaylists();
-        for (Map<String, String> p : raw) {
-            Map<String, String> item = new HashMap<>(p);
-            int count = playlistDao.getTrackCount(
-                    Integer.parseInt(p.get("playlist_id")));
-            item.put("track_count", String.valueOf(count));
-            playlists.add(item);
-        }
-
-        // Kalau belum ada playlist, buat default
-        if (playlists.isEmpty()) {
-            playlistDao.createPlaylist("My Vibes", "gradient", "purple", () -> {
-                if (getActivity() != null) {
-                    getActivity().runOnUiThread(() -> {
-                        loadPlaylists();
-                        if (adapter != null) adapter.notifyDataSetChanged();
-                    });
+        new Thread(() -> {
+            List<Map<String, String>> raw = playlistDao.getAllPlaylists();
+            if (raw.isEmpty()) {
+                playlistDao.createPlaylistNow("My Vibes", "gradient", "purple");
+                raw = playlistDao.getAllPlaylists();
+            }
+            List<Map<String, String>> result = new ArrayList<>();
+            for (Map<String, String> p : raw) {
+                Map<String, String> item = new HashMap<>(p);
+                try {
+                    int count = playlistDao.getTrackCount(
+                            Integer.parseInt(p.get("playlist_id")));
+                    item.put("track_count", String.valueOf(count));
+                } catch (Exception e) {
+                    item.put("track_count", "0");
                 }
-            });
-        }
+                result.add(item);
+            }
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    playlists.clear();
+                    playlists.addAll(result);
+                    if (adapter != null) adapter.notifyDataSetChanged();
+                });
+            }
+        }).start();
     }
 
     private void showCreatePlaylistDialog() {
@@ -145,14 +150,12 @@ public class AddToPlaylistDialog extends DialogFragment {
                 .setPositiveButton("Create", (d, w) -> {
                     String name = etName.getText().toString().trim();
                     if (!name.isEmpty()) {
-                        playlistDao.createPlaylist(name, "gradient", "purple", () -> {
+                        new Thread(() -> {
+                            playlistDao.createPlaylistNow(name, "gradient", "purple");
                             if (getActivity() != null) {
-                                getActivity().runOnUiThread(() -> {
-                                    loadPlaylists();
-                                    adapter.notifyDataSetChanged();
-                                });
+                                getActivity().runOnUiThread(this::loadPlaylists);
                             }
-                        });
+                        }).start();
                     }
                 })
                 .setNegativeButton("Cancel", null)

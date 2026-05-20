@@ -9,23 +9,20 @@
     android:background="?attr/selectableItemBackground">
 
     <!-- Cover -->
-    <androidx.cardview.widget.CardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="12dp"
-        app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/purple_deeper"
-        app:cardElevation="0dp">
+        android:background="@color/purple_deeper"
+        android:gravity="center">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="🎵"
-            android:gravity="center"
             android:textSize="18sp" />
 
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
     <!-- Info -->
     <LinearLayout
@@ -41,8 +38,7 @@
             android:text="Playlist Name"
             android:textColor="@color/text_primary"
             android:textSize="14sp"
-            android:fontFamily="@font/font_space_grotesk"
-            android:fontWeight="600" />
+            android:fontFamily="@font/font_space_grotesk" />
 
         <TextView
             android:id="@+id/tv_track_count"
@@ -55,13 +51,12 @@
 
     </LinearLayout>
 
-    <!-- Checkmark -->
+    <!-- Checkmark — gold color langsung dari src -->
     <ImageView
         android:id="@+id/iv_check"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_favorite"
-        android:tint="@color/gold_primary"
+        android:src="@drawable/ic_heart_filled"
         android:visibility="gone" />
 
 </LinearLayout>
