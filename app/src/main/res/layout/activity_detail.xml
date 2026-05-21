@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_primary"
+    android:background="?android:colorBackground"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingTop="12dp"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NOW PLAYING"
-            android:textColor="#66FFFFFF"
+            android:textColor="@color/text_secondary"
             android:textSize="11sp"
             android:fontFamily="@font/font_bebas"
             android:letterSpacing="0.2"
@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Track Name"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="24sp"
                 android:fontFamily="@font/font_bebas"
                 android:letterSpacing="0.05"
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Artist · Album · Year"
-                android:textColor="#66FFFFFF"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 android:fontFamily="@font/font_dm_sans"
                 android:layout_marginTop="2dp" />
@@ -119,8 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:progressTint="@color/purple_primary"
-        android:progressBackgroundTint="#14FFFFFF"
+        android:progressTint="?attr/colorPrimary"
+        android:progressBackgroundTint="@color/border_white"
         android:thumbTint="@color/gold_primary"
         android:minHeight="4dp"
         android:maxHeight="4dp" />
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="0:00"
-            android:textColor="#44FFFFFF"
+            android:textColor="@color/text_hint"
             android:textSize="11sp"
             android:fontFamily="@font/font_dm_sans" />
 
@@ -147,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3:20"
-            android:textColor="#44FFFFFF"
+            android:textColor="@color/text_hint"
             android:textSize="11sp"
             android:fontFamily="@font/font_dm_sans" />
 
@@ -211,7 +211,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#0DFFFFFF"
+        android:background="@color/border_white"
         android:layout_marginBottom="8dp" />
 
     <!-- Action Row -->
@@ -326,12 +326,12 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_share"
-                app:tint="#66FFFFFF" />
+                app:tint="@color/text_muted" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Share"
-                android:textColor="#66FFFFFF"
+                android:textColor="@color/text_muted"
                 android:textSize="10sp"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/font_space_grotesk" />
@@ -343,7 +343,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#0DFFFFFF"
+        android:background="@color/border_white"
         android:layout_marginBottom="8dp" />
 
     <!-- Bottom Nav -->
@@ -372,7 +372,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOME"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
@@ -396,7 +396,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FIND"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
@@ -431,7 +431,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FAVS"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
@@ -455,7 +455,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ME"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"

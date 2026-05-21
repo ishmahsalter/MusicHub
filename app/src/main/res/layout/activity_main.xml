@@ -74,7 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Not Playing"
-                        android:textColor="@color/white"
+                        android:textColor="@color/text_primary"
                         android:textSize="12sp"
                         android:fontFamily="@font/font_space_grotesk"
                         android:maxLines="1"
@@ -85,7 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tap a track to play"
-                        android:textColor="#66FFFFFF"
+                        android:textColor="@color/text_secondary"
                         android:textSize="10sp"
                         android:fontFamily="@font/font_dm_sans"
                         android:layout_marginTop="1dp" />
@@ -206,7 +206,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="0:00"
-                    android:textColor="#33FFFFFF"
+                    android:textColor="@color/text_hint"
                     android:textSize="9sp"
                     android:fontFamily="@font/font_dm_sans" />
 
@@ -214,7 +214,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0:30"
-                    android:textColor="#33FFFFFF"
+                    android:textColor="@color/text_hint"
                     android:textSize="9sp"
                     android:fontFamily="@font/font_dm_sans" />
 

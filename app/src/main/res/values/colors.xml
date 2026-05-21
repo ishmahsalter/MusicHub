@@ -46,4 +46,6 @@
     <!-- ══ LEGACY ══ -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Always white — use on colored buttons, hero images, gradient overlays -->
+    <color name="text_on_dark">#FFFFFF</color>
 </resources>

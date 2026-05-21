@@ -46,6 +46,7 @@
         <item name="colorSecondary">#00D4FF</item>
         <item name="colorSecondaryVariant">#0099BB</item>
         <item name="colorOnSecondary">#000000</item>
+        <item name="colorAccent">#4F6EF7</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
         <item name="android:textColorSecondary">#99FFFFFF</item>
         <item name="android:textColorHint">#33FFFFFF</item>

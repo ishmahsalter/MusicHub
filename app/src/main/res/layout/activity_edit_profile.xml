@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary">
+    android:background="?android:colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,10 +110,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="#15A855F7"
+            app:cardBackgroundColor="@color/search_bar_bg"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
-            app:strokeColor="#33A855F7"
+            app:strokeColor="@color/search_bar_stroke"
             app:strokeWidth="1dp">
 
             <EditText
@@ -151,10 +151,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:cardBackgroundColor="#15A855F7"
+            app:cardBackgroundColor="@color/search_bar_bg"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
-            app:strokeColor="#33A855F7"
+            app:strokeColor="@color/search_bar_stroke"
             app:strokeWidth="1dp">
 
             <EditText
@@ -206,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="✦ Aurora"
-                    android:textColor="#E9D5FF"
+                    android:textColor="@color/purple_soft"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_active"
@@ -221,7 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Midnight"
-                    android:textColor="#66FFFFFF"
+                    android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_inactive"
@@ -236,7 +236,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gold Rush"
-                    android:textColor="#66FFFFFF"
+                    android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_inactive"
@@ -284,7 +284,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:thumbTint="@color/purple_primary"
+                android:thumbTint="?attr/colorPrimary"
                 android:trackTint="#44A855F7" />
 
         </LinearLayout>
@@ -299,7 +299,7 @@
             android:textSize="14sp"
             android:fontFamily="@font/font_bebas"
             android:letterSpacing="0.2"
-            android:backgroundTint="@color/purple_dark" />
+            android:backgroundTint="?attr/colorPrimary" />
 
     </LinearLayout>
 

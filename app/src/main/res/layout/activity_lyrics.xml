@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_primary"
+    android:background="?android:colorBackground"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingTop="12dp"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="LYRICS"
-            android:textColor="#66FFFFFF"
+            android:textColor="@color/text_secondary"
             android:textSize="11sp"
             android:fontFamily="@font/font_bebas"
             android:letterSpacing="0.2"
@@ -73,7 +73,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_music_note"
                 android:padding="6dp"
-                app:tint="#66FFFFFF" />
+                app:tint="@color/text_muted" />
 
         </androidx.cardview.widget.CardView>
 
@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Track Name"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="12sp"
                 android:fontFamily="@font/font_space_grotesk"
                 android:maxLines="1"
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Artist"
-                android:textColor="#66FFFFFF"
+                android:textColor="@color/text_secondary"
                 android:textSize="10sp"
                 android:fontFamily="@font/font_dm_sans" />
 
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="0:00"
-            android:textColor="#33FFFFFF"
+            android:textColor="@color/text_hint"
             android:textSize="9sp"
             android:fontFamily="@font/font_dm_sans" />
 
@@ -170,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0:30"
-            android:textColor="#33FFFFFF"
+            android:textColor="@color/text_hint"
             android:textSize="9sp"
             android:fontFamily="@font/font_dm_sans" />
 
@@ -274,7 +274,7 @@
         android:gravity="center"
         android:paddingTop="6dp"
         android:paddingBottom="8dp"
-        android:background="@color/bg_card">
+        android:background="?attr/colorSurface">
 
         <!-- HOME -->
         <LinearLayout
@@ -288,12 +288,12 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_home"
-                app:tint="@color/white" />
+                app:tint="@color/text_primary" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOME"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
@@ -312,12 +312,12 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_search"
-                app:tint="@color/white" />
+                app:tint="@color/text_primary" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FIND"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
@@ -347,12 +347,12 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_heart"
-                app:tint="@color/white" />
+                app:tint="@color/text_primary" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FAVS"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
@@ -371,12 +371,12 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/ic_profile"
-                app:tint="@color/white" />
+                app:tint="@color/text_primary" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ME"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary">
+    android:background="?android:colorBackground">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:layout_margin="16dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_back"
-                    app:tint="@color/white" />
+                    app:tint="@color/text_on_dark" />
 
                 <TextView
                     android:id="@+id/tv_artist_name"
@@ -43,7 +43,7 @@
                     android:layout_gravity="bottom"
                     android:layout_margin="16dp"
                     android:text="Artist Name"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_on_dark"
                     android:textSize="28sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -170,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DISCOGRAPHY"
-                android:textColor="@color/gold_primary"
+                android:textColor="@color/section_title"
                 android:textSize="12sp"
                 android:letterSpacing="0.2"
                 android:paddingStart="16dp"

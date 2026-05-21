@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_primary">
+    android:background="?android:colorBackground">
 
     <!-- Hero cover section -->
     <FrameLayout
@@ -34,7 +34,7 @@
             android:layout_margin="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_back"
-            app:tint="@color/white" />
+            app:tint="@color/text_on_dark" />
 
         <!-- Bottom info -->
         <LinearLayout
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Playlist"
-                android:textColor="@color/white"
+                android:textColor="@color/text_on_dark"
                 android:textSize="28sp"
                 android:fontFamily="@font/font_bebas"
                 android:letterSpacing="0.05"
@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0 tracks"
-                android:textColor="#CCFFFFFF"
+                android:textColor="@color/text_on_dark"
                 android:textSize="12sp"
                 android:fontFamily="@font/font_dm_sans"
                 android:layout_marginTop="4dp" />
@@ -90,7 +90,7 @@
             android:textSize="12sp"
             android:fontFamily="@font/font_bebas"
             android:letterSpacing="0.1"
-            android:backgroundTint="@color/purple_dark"
+            android:backgroundTint="?attr/colorPrimary"
             android:paddingStart="20dp"
             android:paddingEnd="20dp" />
 
@@ -108,7 +108,7 @@
             android:alpha="0.6"
             android:layout_marginStart="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/white" />
+            app:tint="@color/text_muted" />
 
         <ImageView
             android:id="@+id/btn_edit_cover"
@@ -119,7 +119,7 @@
             android:alpha="0.6"
             android:layout_marginStart="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/white" />
+            app:tint="@color/text_muted" />
 
         <ImageView
             android:id="@+id/btn_delete"
@@ -130,7 +130,7 @@
             android:alpha="0.6"
             android:layout_marginStart="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/white" />
+            app:tint="@color/text_muted" />
 
     </LinearLayout>
 
@@ -138,7 +138,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#0DFFFFFF"
+        android:background="@color/border_white"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
 
@@ -147,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TRACKS"
-        android:textColor="@color/gold_primary"
+        android:textColor="@color/section_title"
         android:textSize="11sp"
         android:fontFamily="@font/font_bebas"
         android:letterSpacing="0.2"
