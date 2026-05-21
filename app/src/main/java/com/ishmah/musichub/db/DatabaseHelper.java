@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "musichub.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     // TABLE: favorites
     public static final String TABLE_FAVORITES = "favorites";
@@ -46,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_PHOTO_URI = "photo_uri";
     public static final String COL_THEME = "theme";
     public static final String COL_NOTIF_ENABLED = "notif_enabled";
+    public static final String COL_LISTENING_SECONDS = "total_listening_seconds";
 
     // TABLE: cached_images
     public static final String TABLE_CACHED_IMAGES = "cached_images";
@@ -96,7 +97,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_BIO + " TEXT, " +
                 COL_PHOTO_URI + " TEXT, " +
                 COL_THEME + " TEXT, " +
-                COL_NOTIF_ENABLED + " INTEGER DEFAULT 1)");
+                COL_NOTIF_ENABLED + " INTEGER DEFAULT 1, " +
+                COL_LISTENING_SECONDS + " INTEGER DEFAULT 0)");
 
         // cached_images
         db.execSQL("CREATE TABLE " + TABLE_CACHED_IMAGES + " (" +
@@ -108,12 +110,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLAYLISTS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLAYLIST_TRACKS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FOLLOWING);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_PROFILE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CACHED_IMAGES);
-        onCreate(db);
+        if (oldVersion < 2) {
+            // Non-destructive: add listening time column, preserving all user data
+            try {
+                db.execSQL("ALTER TABLE " + TABLE_USER_PROFILE +
+                        " ADD COLUMN " + COL_LISTENING_SECONDS + " INTEGER DEFAULT 0");
+            } catch (Exception ignored) {}
+        }
     }
 }

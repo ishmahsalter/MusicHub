@@ -1,10 +1,12 @@
 package com.ishmah.musichub;
 
+import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import com.ishmah.musichub.db.UserProfileDao;
 import com.ishmah.musichub.model.Track;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class MusicPlayerManager {
 
     private static MusicPlayerManager instance;
     private static final String TAG = "MusicPlayerManager";
+    private static final int MAX_PREVIEW_SECONDS = 30;
 
     private String currentTrackName = "";
     private String currentArtistName = "";
@@ -27,8 +30,12 @@ public class MusicPlayerManager {
     private int currentIndex = -1;
 
     private MediaPlayer mediaPlayer;
-    // Pakai Handler di main thread
     private final Handler handler = new Handler(Looper.getMainLooper());
+
+    // Listening time tracking
+    private Context appContext;
+    private UserProfileDao profileDao;
+    private int secondsPlayedInSession = 0;
 
     // Support multiple listeners
     private final List<OnPlayerStateChangedListener> listeners = new ArrayList<>();
@@ -70,12 +77,27 @@ public class MusicPlayerManager {
                     notifyProgressChanged(currentProgress, totalDuration);
                     handler.postDelayed(this, 1000);
                 } else {
+                    stopSecondsCounter();
+                    saveListeningTime();
                     isPlaying = false;
                     currentProgress = 0;
                     notifyPlayStateChanged(false);
                     // Auto next
                     if (hasPlaylist()) playNext();
                 }
+            }
+        }
+    };
+
+    // Seconds counter runnable — increments once per second while playing
+    private final Runnable secondsCountRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (secondsPlayedInSession < MAX_PREVIEW_SECONDS) {
+                secondsPlayedInSession++;
+            }
+            if (isPlaying) {
+                handler.postDelayed(this, 1000);
             }
         }
     };
@@ -89,11 +111,36 @@ public class MusicPlayerManager {
         return instance;
     }
 
-    // Add listener
+    public void init(Context context) {
+        if (appContext == null) {
+            appContext = context.getApplicationContext();
+            profileDao = new UserProfileDao(appContext);
+        }
+    }
+
+    // ── Listening time helpers ─────────────────────────────────────────────
+
+    private void startSecondsCounter() {
+        handler.removeCallbacks(secondsCountRunnable);
+        handler.postDelayed(secondsCountRunnable, 1000);
+    }
+
+    private void stopSecondsCounter() {
+        handler.removeCallbacks(secondsCountRunnable);
+    }
+
+    private void saveListeningTime() {
+        if (secondsPlayedInSession > 0 && profileDao != null) {
+            profileDao.addListeningTime(secondsPlayedInSession);
+        }
+        secondsPlayedInSession = 0;
+    }
+
+    // ── Listener management ───────────────────────────────────────────────
+
     public void addListener(OnPlayerStateChangedListener listener) {
         if (listener != null && !listeners.contains(listener)) {
             listeners.add(listener);
-            // Immediately sync state
             listener.onPlayStateChanged(isPlaying);
             listener.onProgressChanged(currentProgress, totalDuration);
             if (!currentTrackName.isEmpty()) {
@@ -103,18 +150,15 @@ public class MusicPlayerManager {
         }
     }
 
-    // Remove listener
     public void removeListener(OnPlayerStateChangedListener listener) {
         listeners.remove(listener);
     }
 
-    // Legacy setListener support
     public void setListener(OnPlayerStateChangedListener listener) {
         if (listener == null) return;
         if (!listeners.contains(listener)) {
             listeners.add(listener);
         }
-        // Immediately sync
         listener.onPlayStateChanged(isPlaying);
         listener.onProgressChanged(currentProgress, totalDuration);
         if (!currentTrackName.isEmpty()) {
@@ -123,7 +167,6 @@ public class MusicPlayerManager {
         }
     }
 
-    // Notify all listeners
     private void notifyTrackChanged(String name, String artist,
                                     String art, String id) {
         handler.post(() -> {
@@ -149,6 +192,8 @@ public class MusicPlayerManager {
         });
     }
 
+    // ── Playback ──────────────────────────────────────────────────────────
+
     public void setPlaylist(List<Track> tracks, int startIndex) {
         this.playlist = new ArrayList<>(tracks);
         this.currentIndex = startIndex;
@@ -167,16 +212,16 @@ public class MusicPlayerManager {
 
         notifyTrackChanged(trackName, artistName, albumArt, trackId);
 
+        // saves time from any previous track before starting new one
         stopMediaPlayer();
 
-        if (this.currentPreviewUrl != null &&
-                !this.currentPreviewUrl.isEmpty()) {
+        if (this.currentPreviewUrl != null && !this.currentPreviewUrl.isEmpty()) {
             startMediaPlayer(this.currentPreviewUrl);
         } else {
-            // Simulasi
             isPlaying = true;
             notifyPlayStateChanged(true);
             handler.post(simulationRunnable);
+            startSecondsCounter();
         }
     }
 
@@ -200,35 +245,37 @@ public class MusicPlayerManager {
                 notifyProgressChanged(0, totalDuration);
                 handler.removeCallbacks(progressRunnable);
                 handler.post(progressRunnable);
+                startSecondsCounter();
             });
 
             mediaPlayer.setOnCompletionListener(mp -> {
+                stopSecondsCounter();
+                saveListeningTime();
                 isPlaying = false;
                 currentProgress = 0;
                 handler.removeCallbacks(progressRunnable);
                 notifyPlayStateChanged(false);
                 notifyProgressChanged(0, totalDuration);
-                // Auto next
                 if (hasPlaylist()) {
-                    handler.postDelayed(() -> playNext(), 500);
+                    handler.postDelayed(this::playNext, 500);
                 }
             });
 
             mediaPlayer.setOnErrorListener((mp, what, extra) -> {
                 Log.e(TAG, "MediaPlayer error what=" + what);
+                stopSecondsCounter();
                 isPlaying = false;
                 notifyPlayStateChanged(false);
-                // Fallback simulasi
                 handler.post(simulationRunnable);
                 return true;
             });
 
         } catch (Exception e) {
             Log.e(TAG, "startMediaPlayer error: " + e.getMessage());
-            // Fallback simulasi
             isPlaying = true;
             notifyPlayStateChanged(true);
             handler.post(simulationRunnable);
+            startSecondsCounter();
         }
     }
 
@@ -239,27 +286,31 @@ public class MusicPlayerManager {
                     mediaPlayer.pause();
                     isPlaying = false;
                     handler.removeCallbacks(progressRunnable);
+                    stopSecondsCounter();
+                    saveListeningTime();
                 } else {
                     mediaPlayer.start();
                     isPlaying = true;
                     handler.removeCallbacks(progressRunnable);
                     handler.post(progressRunnable);
+                    startSecondsCounter();
                 }
             } catch (Exception e) {
                 Log.e(TAG, "togglePlayPause error: " + e.getMessage());
                 isPlaying = !isPlaying;
             }
         } else {
-            // Simulasi
             isPlaying = !isPlaying;
             if (isPlaying) {
                 handler.removeCallbacks(simulationRunnable);
                 handler.post(simulationRunnable);
+                startSecondsCounter();
             } else {
                 handler.removeCallbacks(simulationRunnable);
+                stopSecondsCounter();
+                saveListeningTime();
             }
         }
-        // Notify SETELAH state berubah
         notifyPlayStateChanged(isPlaying);
     }
 
@@ -302,6 +353,8 @@ public class MusicPlayerManager {
     }
 
     private void stopMediaPlayer() {
+        stopSecondsCounter();
+        saveListeningTime();
         handler.removeCallbacks(progressRunnable);
         handler.removeCallbacks(simulationRunnable);
         if (mediaPlayer != null) {
@@ -316,7 +369,8 @@ public class MusicPlayerManager {
         isPlaying = false;
     }
 
-    // Getters
+    // ── Getters ───────────────────────────────────────────────────────────
+
     public String getCurrentTrackName() { return currentTrackName; }
     public String getCurrentArtistName() { return currentArtistName; }
     public String getCurrentAlbumArt() { return currentAlbumArt; }

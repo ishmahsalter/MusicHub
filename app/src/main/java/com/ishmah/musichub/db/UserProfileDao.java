@@ -3,6 +3,8 @@ package com.ishmah.musichub.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Handler;
+import android.os.Looper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +12,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class UserProfileDao {
+
+    public interface IntCallback {
+        void onResult(int value);
+    }
 
     private final android.database.sqlite.SQLiteDatabase db;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -83,6 +89,38 @@ public class UserProfileDao {
             values.put(DatabaseHelper.COL_THEME, theme);
             db.update(DatabaseHelper.TABLE_USER_PROFILE, values, null, null);
             if (onDone != null) onDone.run();
+        });
+    }
+
+    public void addListeningTime(int seconds) {
+        if (seconds <= 0) return;
+        executor.execute(() -> {
+            Cursor cursor = db.query(DatabaseHelper.TABLE_USER_PROFILE,
+                    new String[]{DatabaseHelper.COL_LISTENING_SECONDS},
+                    null, null, null, null, null);
+            int current = 0;
+            if (cursor.moveToFirst()) {
+                current = cursor.getInt(0);
+            }
+            cursor.close();
+            ContentValues values = new ContentValues();
+            values.put(DatabaseHelper.COL_LISTENING_SECONDS, current + seconds);
+            db.update(DatabaseHelper.TABLE_USER_PROFILE, values, null, null);
+        });
+    }
+
+    public void getTotalListeningSeconds(IntCallback callback) {
+        executor.execute(() -> {
+            Cursor cursor = db.query(DatabaseHelper.TABLE_USER_PROFILE,
+                    new String[]{DatabaseHelper.COL_LISTENING_SECONDS},
+                    null, null, null, null, null);
+            int total = 0;
+            if (cursor.moveToFirst()) {
+                total = cursor.getInt(0);
+            }
+            cursor.close();
+            int finalTotal = total;
+            new Handler(Looper.getMainLooper()).post(() -> callback.onResult(finalTotal));
         });
     }
 }

@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         playerManager = MusicPlayerManager.getInstance();
+        playerManager.init(this);
 
         NavHostFragment navHostFragment = (NavHostFragment)
                 getSupportFragmentManager()

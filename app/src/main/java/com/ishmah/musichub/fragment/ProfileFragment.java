@@ -114,16 +114,15 @@ public class ProfileFragment extends Fragment {
         executor.execute(() -> {
             List<Map<String, String>> favorites = favoriteDao.getAllFavorites();
             int likedCount = favorites.size();
-            long totalSecs = 0;
-            for (Map<String, String> fav : favorites) {
-                totalSecs += parseDuration(fav.get("duration"));
-            }
-            long finalSecs = totalSecs;
             if (getActivity() != null) {
-                new Handler(Looper.getMainLooper()).post(() -> {
-                    tvLiked.setText(String.valueOf(likedCount));
-                    tvListenHours.setText(formatListenTime(finalSecs));
-                });
+                new Handler(Looper.getMainLooper()).post(() ->
+                        tvLiked.setText(String.valueOf(likedCount)));
+            }
+        });
+
+        userProfileDao.getTotalListeningSeconds(seconds -> {
+            if (isAdded() && getActivity() != null) {
+                tvListenHours.setText(formatListenTime(seconds));
             }
         });
     }
@@ -181,24 +180,12 @@ public class ProfileFragment extends Fragment {
                 .show();
     }
 
-    private long parseDuration(String duration) {
-        if (duration == null || duration.isEmpty()) return 0;
-        try {
-            if (duration.contains(":")) {
-                String[] parts = duration.split(":");
-                if (parts.length == 2)
-                    return Long.parseLong(parts[0].trim()) * 60 + Long.parseLong(parts[1].trim());
-            } else {
-                return Long.parseLong(duration.trim());
-            }
-        } catch (Exception ignored) {}
-        return 0;
-    }
-
-    private String formatListenTime(long totalSecs) {
+    private String formatListenTime(int totalSecs) {
+        if (totalSecs < 60) return totalSecs + "s";
         long hours   = totalSecs / 3600;
         long minutes = (totalSecs % 3600) / 60;
-        if (hours > 0) return hours + " hrs " + minutes + " min";
-        return minutes + " min";
+        long seconds = totalSecs % 60;
+        if (hours > 0) return hours + "h " + minutes + "m";
+        return minutes + "m " + seconds + "s";
     }
 }
