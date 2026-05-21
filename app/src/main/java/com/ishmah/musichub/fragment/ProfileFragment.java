@@ -23,6 +23,10 @@ import com.ishmah.musichub.db.PlaylistDao;
 import com.ishmah.musichub.db.UserProfileDao;
 import de.hdodenhof.circleimageview.CircleImageView;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import android.os.Handler;
+import android.os.Looper;
 
 public class ProfileFragment extends Fragment {
 
@@ -38,6 +42,7 @@ public class ProfileFragment extends Fragment {
     private PlaylistDao playlistDao;
     private PlaylistCardAdapter playlistCardAdapter;
     private final List<Map<String, String>> playlists = new ArrayList<>();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Nullable
     @Override
@@ -106,7 +111,7 @@ public class ProfileFragment extends Fragment {
 
         tvFollowing.setText(String.valueOf(artistDao.getFollowingCount()));
 
-        new Thread(() -> {
+        executor.execute(() -> {
             List<Map<String, String>> favorites = favoriteDao.getAllFavorites();
             int likedCount = favorites.size();
             long totalSecs = 0;
@@ -115,16 +120,16 @@ public class ProfileFragment extends Fragment {
             }
             long finalSecs = totalSecs;
             if (getActivity() != null) {
-                getActivity().runOnUiThread(() -> {
+                new Handler(Looper.getMainLooper()).post(() -> {
                     tvLiked.setText(String.valueOf(likedCount));
                     tvListenHours.setText(formatListenTime(finalSecs));
                 });
             }
-        }).start();
+        });
     }
 
     private void loadPlaylists() {
-        new Thread(() -> {
+        executor.execute(() -> {
             List<Map<String, String>> raw = playlistDao.getAllPlaylists();
             List<Map<String, String>> result = new ArrayList<>();
             for (Map<String, String> p : raw) {
@@ -138,7 +143,7 @@ public class ProfileFragment extends Fragment {
                 result.add(item);
             }
             if (getActivity() != null) {
-                getActivity().runOnUiThread(() -> {
+                new Handler(Looper.getMainLooper()).post(() -> {
                     playlists.clear();
                     playlists.addAll(result);
                     playlistCardAdapter.notifyDataSetChanged();
@@ -148,7 +153,7 @@ public class ProfileFragment extends Fragment {
                     rvPlaylists.setVisibility(empty ? View.GONE : View.VISIBLE);
                 });
             }
-        }).start();
+        });
     }
 
     private void showNewPlaylistDialog() {
@@ -165,10 +170,12 @@ public class ProfileFragment extends Fragment {
                     String name = etName.getText().toString().trim();
                     if (name.isEmpty()) name = "My Playlist";
                     String finalName = name;
-                    new Thread(() -> {
+                    executor.execute(() -> {
                         playlistDao.createPlaylistNow(finalName, "gradient", "purple");
-                        if (getActivity() != null) getActivity().runOnUiThread(this::loadPlaylists);
-                    }).start();
+                        if (getActivity() != null) {
+                            new Handler(Looper.getMainLooper()).post(this::loadPlaylists);
+                        }
+                    });
                 })
                 .setNegativeButton("Cancel", null)
                 .show();

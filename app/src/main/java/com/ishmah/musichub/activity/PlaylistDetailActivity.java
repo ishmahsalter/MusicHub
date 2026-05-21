@@ -2,6 +2,7 @@ package com.ishmah.musichub.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
@@ -12,6 +13,7 @@ import android.widget.*;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -29,6 +31,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class PlaylistDetailActivity extends AppCompatActivity {
 
@@ -45,10 +49,16 @@ public class PlaylistDetailActivity extends AppCompatActivity {
     private final List<Map<String, String>> tracks = new ArrayList<>();
     private PlaylistTrackAdapter trackAdapter;
     private ActivityResultLauncher<String> galleryLauncher;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences("musichub_prefs", MODE_PRIVATE);
+        AppCompatDelegate.setDefaultNightMode(
+                "light".equals(prefs.getString("theme", "dark"))
+                        ? AppCompatDelegate.MODE_NIGHT_NO
+                        : AppCompatDelegate.MODE_NIGHT_YES);
         setContentView(R.layout.activity_playlist_detail);
 
         playlistDao = new PlaylistDao(this);
@@ -108,7 +118,7 @@ public class PlaylistDetailActivity extends AppCompatActivity {
     }
 
     private void loadPlaylistData() {
-        new Thread(() -> {
+        executor.execute(() -> {
             List<Map<String, String>> allPlaylists = playlistDao.getAllPlaylists();
             for (Map<String, String> p : allPlaylists) {
                 if (String.valueOf(playlistId).equals(p.get("playlist_id"))) {
@@ -128,7 +138,7 @@ public class PlaylistDetailActivity extends AppCompatActivity {
                 llEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
                 rvTracks.setVisibility(empty ? View.GONE : View.VISIBLE);
             });
-        }).start();
+        });
     }
 
     private void updateMeta() {

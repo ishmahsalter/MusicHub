@@ -1,6 +1,7 @@
 package com.ishmah.musichub.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import com.bumptech.glide.Glide;
 import com.ishmah.musichub.R;
 import com.ishmah.musichub.db.UserProfileDao;
@@ -39,6 +41,7 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        applyThemeFromPrefs();
         setContentView(R.layout.activity_edit_profile);
 
         userProfileDao = new UserProfileDao(this);
@@ -130,6 +133,16 @@ public class EditProfileActivity extends AppCompatActivity {
             return;
         }
 
+        getSharedPreferences("musichub_prefs", MODE_PRIVATE)
+                .edit()
+                .putString("theme", "dark".equals(selectedTheme) ? "dark" : "light")
+                .apply();
+
+        AppCompatDelegate.setDefaultNightMode(
+                "dark".equals(selectedTheme)
+                        ? AppCompatDelegate.MODE_NIGHT_YES
+                        : AppCompatDelegate.MODE_NIGHT_NO);
+
         userProfileDao.saveProfile(
                 username, bio,
                 selectedPhotoUri != null ? selectedPhotoUri : "",
@@ -139,5 +152,14 @@ public class EditProfileActivity extends AppCompatActivity {
                     setResult(RESULT_OK);
                     finish();
                 }));
+    }
+
+    private void applyThemeFromPrefs() {
+        SharedPreferences prefs = getSharedPreferences("musichub_prefs", MODE_PRIVATE);
+        String theme = prefs.getString("theme", "dark");
+        AppCompatDelegate.setDefaultNightMode(
+                "light".equals(theme)
+                        ? AppCompatDelegate.MODE_NIGHT_NO
+                        : AppCompatDelegate.MODE_NIGHT_YES);
     }
 }

@@ -1,11 +1,13 @@
 package com.ishmah.musichub.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import com.ishmah.musichub.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -17,6 +19,12 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences("musichub_prefs", MODE_PRIVATE);
+        String theme = prefs.getString("theme", "dark");
+        AppCompatDelegate.setDefaultNightMode(
+                "light".equals(theme)
+                        ? AppCompatDelegate.MODE_NIGHT_NO
+                        : AppCompatDelegate.MODE_NIGHT_YES);
         setContentView(R.layout.activity_splash);
 
         progressBar = findViewById(R.id.progress_bar);

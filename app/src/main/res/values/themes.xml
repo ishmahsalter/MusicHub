@@ -2,20 +2,21 @@
 <resources>
     <style name="Theme.MusicHub" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <!-- Background -->
+        <!-- Background (light) -->
         <item name="android:windowBackground">@color/bg_primary</item>
         <item name="android:colorBackground">@color/bg_primary</item>
         <item name="colorSurface">@color/bg_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
 
         <!-- Primary = Purple -->
-        <item name="colorPrimary">@color/purple_primary</item>
-        <item name="colorPrimaryVariant">@color/purple_dark</item>
+        <item name="colorPrimary">@color/purple_dark</item>
+        <item name="colorPrimaryVariant">@color/purple_deeper</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary = Gold -->
         <item name="colorSecondary">@color/gold_primary</item>
         <item name="colorSecondaryVariant">@color/gold_dark</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
 
         <!-- Text -->
         <item name="android:textColorPrimary">@color/text_primary</item>
@@ -25,10 +26,10 @@
         <!-- Default font = Space Grotesk -->
         <item name="android:fontFamily">@font/font_space_grotesk</item>
 
-        <!-- Status bar -->
+        <!-- Status bar (light mode uses dark icons) -->
         <item name="android:statusBarColor">@color/bg_primary</item>
         <item name="android:navigationBarColor">@color/bg_primary</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightStatusBar">true</item>
 
         <!-- No action bar -->
         <item name="windowNoTitle">true</item>

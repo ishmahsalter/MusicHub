@@ -1,7 +1,59 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MusicHub" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MusicHub" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Background (dark Aurora Void) -->
+        <item name="android:windowBackground">@color/bg_primary</item>
+        <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="colorSurface">@color/bg_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+
+        <!-- Primary = Purple Glow -->
+        <item name="colorPrimary">@color/purple_primary</item>
+        <item name="colorPrimaryVariant">@color/purple_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary = Gold -->
+        <item name="colorSecondary">@color/gold_primary</item>
+        <item name="colorSecondaryVariant">@color/gold_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Text (white on dark bg) -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+
+        <!-- Default font = Space Grotesk -->
+        <item name="android:fontFamily">@font/font_space_grotesk</item>
+
+        <!-- Status bar (dark mode uses light icons) -->
+        <item name="android:statusBarColor">@color/bg_primary</item>
+        <item name="android:navigationBarColor">@color/bg_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- No action bar -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
     </style>
+
+    <!-- Style untuk judul pakai Bebas Neue -->
+    <style name="TextStyle.Display" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/font_bebas</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <!-- Style untuk body pakai DM Sans -->
+    <style name="TextStyle.Body" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/font_dm_sans</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- Style untuk label/meta pakai Space Grotesk -->
+    <style name="TextStyle.Meta" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/font_space_grotesk</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+
 </resources>
