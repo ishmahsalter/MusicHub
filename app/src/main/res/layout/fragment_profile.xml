@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary">
+    android:background="?android:colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -227,7 +227,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TOTAL LISTENING TIME"
-                    android:textColor="@color/gold_primary"
+                    android:textColor="@color/section_title"
                     android:textSize="10sp"
                     android:fontFamily="@font/font_bebas"
                     android:letterSpacing="0.2" />
@@ -261,7 +261,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="MY PLAYLISTS"
-                android:textColor="@color/gold_primary"
+                android:textColor="@color/section_title"
                 android:textSize="13sp"
                 android:fontFamily="@font/font_bebas"
                 android:letterSpacing="0.2" />

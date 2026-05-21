@@ -1,56 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.MusicHub" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <!-- Background (light) -->
+    <!--
+      Theme.MusicHub — DayNight base.
+      Day   (MODE_NIGHT_NO)  = Gold Rush: values/colors.xml light scheme.
+      Night (MODE_NIGHT_YES) = Aurora:    values-night/colors.xml dark scheme.
+    -->
+    <style name="Theme.MusicHub" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/bg_primary</item>
         <item name="android:colorBackground">@color/bg_primary</item>
         <item name="colorSurface">@color/bg_card</item>
         <item name="colorOnSurface">@color/text_primary</item>
-
-        <!-- Primary = Purple -->
-        <item name="colorPrimary">@color/purple_dark</item>
+        <item name="colorPrimary">@color/purple_primary</item>
         <item name="colorPrimaryVariant">@color/purple_deeper</item>
         <item name="colorOnPrimary">@color/white</item>
-
-        <!-- Secondary = Gold -->
         <item name="colorSecondary">@color/gold_primary</item>
         <item name="colorSecondaryVariant">@color/gold_dark</item>
-        <item name="colorOnSecondary">@color/white</item>
-
-        <!-- Text -->
+        <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:textColorHint">@color/text_hint</item>
-
-        <!-- Default font = Space Grotesk -->
         <item name="android:fontFamily">@font/font_space_grotesk</item>
-
-        <!-- Status bar (light mode uses dark icons) -->
         <item name="android:statusBarColor">@color/bg_primary</item>
         <item name="android:navigationBarColor">@color/bg_primary</item>
+        <!-- Light status bar for Gold Rush (day); night override in values-night/themes.xml -->
         <item name="android:windowLightStatusBar">true</item>
-
-        <!-- No action bar -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-
     </style>
 
-    <!-- Style untuk judul pakai Bebas Neue -->
+    <!--
+      Theme.MusicHub.Midnight — standalone neon-blue dark theme.
+      Applied via activity.setTheme() when theme_name = "midnight".
+      Uses NoActionBar (not DayNight) so day/night system is bypassed.
+      Background: #000820  |  Accent: #4F6EF7  |  Cyan glow: #00D4FF
+    -->
+    <style name="Theme.MusicHub.Midnight" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">#000820</item>
+        <item name="android:colorBackground">#000820</item>
+        <item name="colorSurface">#050D2A</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="colorPrimary">#4F6EF7</item>
+        <item name="colorPrimaryVariant">#3A55D4</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#00D4FF</item>
+        <item name="colorSecondaryVariant">#0099BB</item>
+        <item name="colorOnSecondary">#000000</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#99FFFFFF</item>
+        <item name="android:textColorHint">#33FFFFFF</item>
+        <item name="android:fontFamily">@font/font_space_grotesk</item>
+        <item name="android:statusBarColor">#000820</item>
+        <item name="android:navigationBarColor">#000820</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <!-- Text styles -->
     <style name="TextStyle.Display" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_bebas</item>
         <item name="android:textColor">@color/text_primary</item>
         <item name="android:letterSpacing">0.1</item>
     </style>
 
-    <!-- Style untuk body pakai DM Sans -->
     <style name="TextStyle.Body" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_dm_sans</item>
         <item name="android:textColor">@color/text_secondary</item>
     </style>
 
-    <!-- Style untuk label/meta pakai Space Grotesk -->
     <style name="TextStyle.Meta" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_space_grotesk</item>
         <item name="android:textColor">@color/text_muted</item>

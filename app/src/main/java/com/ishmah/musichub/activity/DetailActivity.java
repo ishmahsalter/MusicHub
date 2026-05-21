@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.ishmah.musichub.MusicPlayerManager;
 import com.ishmah.musichub.R;
+import com.ishmah.musichub.ThemeHelper;
 import com.ishmah.musichub.db.FavoriteDao;
 import com.ishmah.musichub.fragment.AddToPlaylistDialog;
 
@@ -35,11 +36,7 @@ public class DetailActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = getSharedPreferences("musichub_prefs", MODE_PRIVATE);
-        AppCompatDelegate.setDefaultNightMode(
-                "light".equals(prefs.getString("theme", "dark"))
-                        ? AppCompatDelegate.MODE_NIGHT_NO
-                        : AppCompatDelegate.MODE_NIGHT_YES);
+        ThemeHelper.apply(this);
         setContentView(R.layout.activity_detail);
 
         favoriteDao = new FavoriteDao(this);

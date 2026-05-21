@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.ishmah.musichub.R;
+import com.ishmah.musichub.ThemeHelper;
 import com.ishmah.musichub.adapter.AlbumAdapter;
 import com.ishmah.musichub.api.ApiConfig;
 import com.ishmah.musichub.api.DeezerApi;
@@ -46,11 +47,7 @@ public class ArtistActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = getSharedPreferences("musichub_prefs", MODE_PRIVATE);
-        AppCompatDelegate.setDefaultNightMode(
-                "light".equals(prefs.getString("theme", "dark"))
-                        ? AppCompatDelegate.MODE_NIGHT_NO
-                        : AppCompatDelegate.MODE_NIGHT_YES);
+        ThemeHelper.apply(this);
         setContentView(R.layout.activity_artist);
 
         artistDao = new ArtistDao(this);

@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ══ LIGHT MODE — PRIMARY BACKGROUNDS ══ -->
-    <color name="bg_primary">#F5F0FF</color>
-    <color name="bg_secondary">#EDE8FF</color>
-    <color name="bg_tertiary">#E4D9FF</color>
-    <color name="bg_card">#EEE5FF</color>
+    <!-- ══ GOLD RUSH — LIGHT MODE BACKGROUNDS ══ -->
+    <color name="bg_primary">#FAF5FF</color>
+    <color name="bg_secondary">#F0E8FF</color>
+    <color name="bg_tertiary">#E8D8FF</color>
+    <color name="bg_card">#F0E8FF</color>
     <color name="bg_card_deep">#E8D8FF</color>
 
-    <!-- ══ PURPLE GLOW ══ -->
-    <color name="purple_primary">#A855F7</color>
-    <color name="purple_dark">#7C3AED</color>
-    <color name="purple_deeper">#6D28D9</color>
+    <!-- ══ SEARCH BAR ══ -->
+    <color name="search_bar_bg">#E8D8FF</color>
+    <color name="search_bar_stroke">#336B21A8</color>
+
+    <!-- ══ PURPLE (GOLD RUSH ACCENT) ══ -->
+    <color name="purple_primary">#6B21A8</color>
+    <color name="purple_dark">#6B21A8</color>
+    <color name="purple_deeper">#4C1D95</color>
     <color name="purple_subtle">#4C1D95</color>
-    <color name="purple_glow">#9333EA</color>
-    <color name="purple_soft">#7C3AED</color>
+    <color name="purple_glow">#6B21A8</color>
+    <color name="purple_soft">#6B21A8</color>
 
     <!-- ══ GOLD ACCENTS ══ -->
-    <color name="gold_primary">#B8860B</color>
-    <color name="gold_dark">#92680A</color>
+    <color name="gold_primary">#D4AF37</color>
+    <color name="gold_dark">#B8860B</color>
     <color name="gold_soft">#FEF3C7</color>
 
     <!-- ══ TEXT (dark on light bg) ══ -->
-    <color name="text_primary">#1A1A2E</color>
-    <color name="text_secondary">#4A406A</color>
-    <color name="text_muted">#7A70A0</color>
-    <color name="text_hint">#AAAACC</color>
+    <color name="text_primary">#1A0030</color>
+    <color name="text_secondary">#4A4A6A</color>
+    <color name="text_muted">#9090B0</color>
+    <color name="text_hint">#9090B0</color>
 
-    <!-- ══ BORDERS / GLASS ══ -->
-    <color name="border_purple">#47A855F7</color>
-    <color name="border_gold">#47D4AF37</color>
-    <color name="border_white">#14000000</color>
+    <!-- ══ SECTION TITLES ══ -->
+    <color name="section_title">#1A0030</color>
+
+    <!-- ══ BORDERS ══ -->
+    <color name="border_purple">#226B21A8</color>
+    <color name="border_gold">#22D4AF37</color>
+    <color name="border_white">#22000000</color>
 
     <!-- ══ STATUS ══ -->
-    <color name="liked">#B8860B</color>
+    <color name="liked">#D4AF37</color>
     <color name="error">#EF4444</color>
     <color name="success">#16A34A</color>
 
-    <!-- ══ LEGACY (jangan dihapus) ══ -->
+    <!-- ══ LEGACY ══ -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

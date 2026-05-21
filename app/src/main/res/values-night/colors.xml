@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ══ AURORA VOID — DARK BACKGROUNDS (Night Mode) ══ -->
+    <!-- ══ AURORA — DARK MODE BACKGROUNDS ══ -->
     <color name="bg_primary">#07000F</color>
     <color name="bg_secondary">#09001A</color>
     <color name="bg_tertiary">#110026</color>
     <color name="bg_card">#130030</color>
     <color name="bg_card_deep">#0C001F</color>
+
+    <!-- ══ SEARCH BAR ══ -->
+    <color name="search_bar_bg">#0A0020</color>
+    <color name="search_bar_stroke">#33A855F7</color>
 
     <!-- ══ PURPLE GLOW ══ -->
     <color name="purple_primary">#A855F7</color>
@@ -20,13 +24,16 @@
     <color name="gold_dark">#B8860B</color>
     <color name="gold_soft">#FEF3C7</color>
 
-    <!-- ══ TEXT ══ -->
+    <!-- ══ TEXT (white on dark bg) ══ -->
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#99FFFFFF</color>
     <color name="text_muted">#55FFFFFF</color>
     <color name="text_hint">#33FFFFFF</color>
 
-    <!-- ══ BORDERS / GLASS ══ -->
+    <!-- ══ SECTION TITLES (gold on dark) ══ -->
+    <color name="section_title">#D4AF37</color>
+
+    <!-- ══ BORDERS ══ -->
     <color name="border_purple">#47A855F7</color>
     <color name="border_gold">#47D4AF37</color>
     <color name="border_white">#14FFFFFF</color>
@@ -35,4 +42,8 @@
     <color name="liked">#D4AF37</color>
     <color name="error">#EF4444</color>
     <color name="success">#4ADE80</color>
+
+    <!-- ══ LEGACY ══ -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

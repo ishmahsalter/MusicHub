@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.bumptech.glide.Glide;
 import com.ishmah.musichub.R;
+import com.ishmah.musichub.ThemeHelper;
 import com.ishmah.musichub.db.UserProfileDao;
 import de.hdodenhof.circleimageview.CircleImageView;
 import android.widget.EditText;
@@ -53,7 +54,7 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        applyThemeFromPrefs();
+        ThemeHelper.apply(this);
         setContentView(R.layout.activity_edit_profile);
 
         userProfileDao = new UserProfileDao(this);
@@ -177,15 +178,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     setResult(RESULT_OK);
                     finish();
                 }));
-    }
-
-    private void applyThemeFromPrefs() {
-        SharedPreferences prefs = getSharedPreferences("musichub_prefs", MODE_PRIVATE);
-        String theme = prefs.getString("theme", "dark");
-        AppCompatDelegate.setDefaultNightMode(
-                "light".equals(theme)
-                        ? AppCompatDelegate.MODE_NIGHT_NO
-                        : AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     // FIX #4: shut down executor to avoid thread leaks

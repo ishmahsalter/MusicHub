@@ -19,6 +19,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.ishmah.musichub.MusicPlayerManager;
 import com.ishmah.musichub.R;
+import com.ishmah.musichub.ThemeHelper;
 import com.ishmah.musichub.adapter.TrackAdapter;
 import com.ishmah.musichub.api.ApiConfig;
 import com.ishmah.musichub.api.DeezerApi;
@@ -54,11 +55,7 @@ public class AlbumActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = getSharedPreferences("musichub_prefs", MODE_PRIVATE);
-        AppCompatDelegate.setDefaultNightMode(
-                "light".equals(prefs.getString("theme", "dark"))
-                        ? AppCompatDelegate.MODE_NIGHT_NO
-                        : AppCompatDelegate.MODE_NIGHT_YES);
+        ThemeHelper.apply(this);
         setContentView(R.layout.activity_album);
 
         lastFmApi = RetrofitClient.getLastFmInstance().create(LastFmApi.class);

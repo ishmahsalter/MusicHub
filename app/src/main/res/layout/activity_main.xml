@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_primary">
+    android:background="?android:colorBackground">
 
     <!-- Nav Host Fragment -->
     <androidx.fragment.app.FragmentContainerView
@@ -231,7 +231,7 @@
         android:layout_height="56dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@color/bg_card"
+        android:background="?attr/colorSurface"
         android:paddingStart="8dp"
         android:paddingEnd="8dp">
 
@@ -278,7 +278,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FIND"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
@@ -318,7 +318,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FAVS"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"
@@ -343,7 +343,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ME"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="8sp"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/font_bebas"

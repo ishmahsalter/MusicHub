@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary">
+    android:background="?android:colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GOOD EVENING"
-            android:textColor="#66FFFFFF"
+            android:textColor="@color/text_secondary"
             android:textSize="10sp"
             android:fontFamily="@font/font_dm_sans"
             android:letterSpacing="0.05" />
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="YOUR SOUND AWAITS"
-            android:textColor="@color/white"
+            android:textColor="@color/text_primary"
             android:textSize="26sp"
             android:fontFamily="@font/font_bebas"
             android:letterSpacing="0.05"
@@ -64,10 +64,10 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
-            app:cardBackgroundColor="#15A855F7"
+            app:cardBackgroundColor="@color/search_bar_bg"
             app:cardCornerRadius="11dp"
             app:cardElevation="0dp"
-            app:strokeColor="#33A855F7"
+            app:strokeColor="@color/search_bar_stroke"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Search tracks, artists, albums..."
-                    android:textColor="#44FFFFFF"
+                    android:textColor="@color/text_hint"
                     android:textSize="12sp"
                     android:fontFamily="@font/font_dm_sans" />
 
@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="✦ Trending"
-                    android:textColor="#E9D5FF"
+                    android:textColor="@color/purple_soft"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_active"
@@ -131,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pop"
-                    android:textColor="#66FFFFFF"
+                    android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_inactive"
@@ -146,7 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hip-Hop"
-                    android:textColor="#66FFFFFF"
+                    android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_inactive"
@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="R&amp;B"
-                    android:textColor="#66FFFFFF"
+                    android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_inactive"
@@ -176,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rock"
-                    android:textColor="#66FFFFFF"
+                    android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_inactive"
@@ -194,7 +194,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="✦ FEATURED"
-            android:textColor="@color/gold_primary"
+            android:textColor="@color/section_title"
             android:textSize="11sp"
             android:fontFamily="@font/font_bebas"
             android:letterSpacing="0.2"
@@ -252,7 +252,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TRENDING"
-            android:textColor="@color/gold_primary"
+            android:textColor="@color/section_title"
             android:textSize="11sp"
             android:fontFamily="@font/font_bebas"
             android:letterSpacing="0.2"

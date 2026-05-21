@@ -18,6 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.ishmah.musichub.MusicPlayerManager;
 import com.ishmah.musichub.R;
+import com.ishmah.musichub.ThemeHelper;
 
 public class MainActivity extends AppCompatActivity
         implements MusicPlayerManager.OnPlayerStateChangedListener {
@@ -33,12 +34,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = getSharedPreferences("musichub_prefs", MODE_PRIVATE);
-        String theme = prefs.getString("theme", "dark");
-        AppCompatDelegate.setDefaultNightMode(
-                "light".equals(theme)
-                        ? AppCompatDelegate.MODE_NIGHT_NO
-                        : AppCompatDelegate.MODE_NIGHT_YES);
+        ThemeHelper.apply(this);
         setContentView(R.layout.activity_main);
 
         playerManager = MusicPlayerManager.getInstance();
@@ -196,25 +192,27 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setActiveNav(LinearLayout active) {
+        boolean isMidnight = ThemeHelper.isMidnight(this);
+        boolean isGoldRush = ThemeHelper.isGoldRush(this);
+        int activeColor = isMidnight
+                ? 0xFF4F6EF7
+                : getResources().getColor(R.color.purple_glow);
+        int inactiveColor = isGoldRush
+                ? getResources().getColor(R.color.text_muted)
+                : getResources().getColor(R.color.white);
+        float inactiveAlpha = isGoldRush ? 1f : 0.35f;
+
         LinearLayout[] navItems = {navHome, navSearch,
                 navFavorite, navProfile};
         for (LinearLayout item : navItems) {
             if (item == active) {
                 item.setAlpha(1f);
-                ((ImageView) item.getChildAt(0))
-                        .setColorFilter(getResources()
-                                .getColor(R.color.purple_glow));
-                ((TextView) item.getChildAt(1))
-                        .setTextColor(getResources()
-                                .getColor(R.color.purple_glow));
+                ((ImageView) item.getChildAt(0)).setColorFilter(activeColor);
+                ((TextView) item.getChildAt(1)).setTextColor(activeColor);
             } else {
-                item.setAlpha(0.35f);
-                ((ImageView) item.getChildAt(0))
-                        .setColorFilter(getResources()
-                                .getColor(R.color.white));
-                ((TextView) item.getChildAt(1))
-                        .setTextColor(getResources()
-                                .getColor(R.color.white));
+                item.setAlpha(inactiveAlpha);
+                ((ImageView) item.getChildAt(0)).setColorFilter(inactiveColor);
+                ((TextView) item.getChildAt(1)).setTextColor(inactiveColor);
             }
         }
     }
