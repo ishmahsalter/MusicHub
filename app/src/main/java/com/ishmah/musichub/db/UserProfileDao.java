@@ -98,14 +98,19 @@ public class UserProfileDao {
             Cursor cursor = db.query(DatabaseHelper.TABLE_USER_PROFILE,
                     new String[]{DatabaseHelper.COL_LISTENING_SECONDS},
                     null, null, null, null, null);
-            int current = 0;
-            if (cursor.moveToFirst()) {
-                current = cursor.getInt(0);
-            }
+            boolean hasRow = cursor.moveToFirst();
+            int current = hasRow ? cursor.getInt(0) : 0;
             cursor.close();
+
             ContentValues values = new ContentValues();
             values.put(DatabaseHelper.COL_LISTENING_SECONDS, current + seconds);
-            db.update(DatabaseHelper.TABLE_USER_PROFILE, values, null, null);
+
+            if (hasRow) {
+                db.update(DatabaseHelper.TABLE_USER_PROFILE, values, null, null);
+            } else {
+                // No profile row yet — insert one so the time isn't lost
+                db.insert(DatabaseHelper.TABLE_USER_PROFILE, null, values);
+            }
         });
     }
 
