@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -66,6 +67,8 @@ public class SearchFragment extends Fragment {
     private LastFmApi lastFmApi;
     private DeezerApi deezerApi;
     private String lastQuery = "";
+    // Prevents TextWatcher from firing a title-search when a genre chip sets the search bar text
+    private boolean suppressSearch = false;
 
     @Nullable
     @Override
@@ -135,6 +138,7 @@ public class SearchFragment extends Fragment {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (suppressSearch) return; // chip tap already triggered searchByGenre — skip
                 String q = s.toString().trim();
                 if (q.length() >= 2) {
                     lastQuery = q;
@@ -152,6 +156,22 @@ public class SearchFragment extends Fragment {
             if (!lastQuery.isEmpty()) performSearch(lastQuery);
             else loadDiscovery();
         });
+
+        // Intercept back: return to discovery if results are showing, else navigate normally
+        requireActivity().getOnBackPressedDispatcher().addCallback(
+                getViewLifecycleOwner(),
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        if (llResults.getVisibility() == View.VISIBLE) {
+                            etSearch.setText("");
+                            showMode(true);
+                        } else {
+                            setEnabled(false);
+                            requireActivity().getOnBackPressedDispatcher().onBackPressed();
+                        }
+                    }
+                });
 
         loadDiscovery();
     }
@@ -182,10 +202,13 @@ public class SearchFragment extends Fragment {
             final String label = labels[i];
             TextView chip = view.findViewById(chipIds[i]);
             chip.setOnClickListener(v -> {
+                // Suppress TextWatcher so it does not fire performSearch(label) as a title search
+                suppressSearch = true;
                 etSearch.setText(label);
+                suppressSearch = false;
                 etSearch.clearFocus();
                 showMode(false);
-                tvSearchSection.setText("💿 " + label.toUpperCase());
+                tvSearchSection.setText("🎵 TOP " + label.toUpperCase() + " TRACKS");
                 searchByGenre(tag);
             });
         }
