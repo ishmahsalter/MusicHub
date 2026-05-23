@@ -59,21 +59,19 @@
 
         <!-- Mini album art -->
         <androidx.cardview.widget.CardView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            app:cardCornerRadius="7dp"
+            app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="@color/purple_deeper">
+            app:cardBackgroundColor="@color/bg_card">
 
             <ImageView
                 android:id="@+id/iv_mini_art"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_music_note"
-                android:padding="6dp"
-                app:tint="@color/text_muted" />
+                android:src="@drawable/ic_music_note" />
 
         </androidx.cardview.widget.CardView>
 
@@ -221,14 +219,14 @@
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:src="@drawable/ic_text_size"
-                app:tint="#B3C084FC"
+                app:tint="?attr/colorPrimary"
                 android:layout_marginEnd="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Font Size"
-                android:textColor="#B3C084FC"
+                android:textColor="@color/text_secondary"
                 android:textSize="10sp"
                 android:fontFamily="@font/font_space_grotesk" />
 
@@ -251,14 +249,14 @@
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:src="@drawable/ic_share"
-                app:tint="#B3D4AF37"
+                app:tint="@color/gold_primary"
                 android:layout_marginEnd="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Share Lyric"
-                android:textColor="#B3D4AF37"
+                android:textColor="@color/gold_primary"
                 android:textSize="10sp"
                 android:fontFamily="@font/font_space_grotesk" />
 

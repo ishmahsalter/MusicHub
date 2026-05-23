@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
@@ -90,13 +91,16 @@ public class LyricsActivity extends AppCompatActivity
         if (trackName != null) tvLyricsTitle.setText(trackName);
         if (artistName != null) tvLyricsArtist.setText(artistName);
 
+        ivMiniArt.clearColorFilter();
         if (albumArt != null && !albumArt.isEmpty()) {
             Glide.with(this)
                     .load(albumArt)
-                    .apply(RequestOptions.bitmapTransform(
-                            new RoundedCorners(8)))
-                    .placeholder(R.color.bg_card)
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(16)))
+                    .placeholder(R.drawable.ic_music_note)
+                    .error(R.drawable.ic_music_note)
                     .into(ivMiniArt);
+        } else {
+            ivMiniArt.setImageResource(R.drawable.ic_music_note);
         }
 
         // Sync progress
@@ -225,8 +229,8 @@ public class LyricsActivity extends AppCompatActivity
         int diff = index - activeLineIndex;
 
         if (index == activeLineIndex) {
-            // ACTIVE — purple soft bold, left border bg
-            tv.setTextColor(getResources().getColor(R.color.purple_soft));
+            // ACTIVE — bold, themed primary color
+            tv.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
             tv.setTypeface(android.graphics.Typeface.create(
                     "sans-serif", android.graphics.Typeface.BOLD));
             tv.setTextSize(15f);
@@ -234,36 +238,29 @@ public class LyricsActivity extends AppCompatActivity
             tv.setAlpha(1f);
 
         } else if (index < activeLineIndex) {
-            // PAST — makin lama makin redup
-            tv.setTextColor(getResources().getColor(R.color.white));
+            // PAST — secondary color, full alpha (color token carries the weight)
+            tv.setTextColor(ContextCompat.getColor(this, R.color.text_secondary));
             tv.setTypeface(android.graphics.Typeface.DEFAULT);
             tv.setTextSize(13f);
             tv.setBackgroundResource(0);
-            int distPast = activeLineIndex - index;
-            float alpha = distPast == 1 ? 0.35f :
-                    distPast == 2 ? 0.22f : 0.15f;
-            tv.setAlpha(alpha);
+            tv.setAlpha(1f);
 
         } else if (diff == 2 && totalLines > 6 && index % 4 == 0) {
-            // GOLD — chorus estimasi
-            tv.setTextColor(getResources().getColor(R.color.gold_primary));
+            // GOLD — chorus estimate, keep gold accent
+            tv.setTextColor(ContextCompat.getColor(this, R.color.gold_primary));
             tv.setTypeface(android.graphics.Typeface.create(
                     "sans-serif", android.graphics.Typeface.BOLD));
             tv.setTextSize(13f);
             tv.setBackgroundResource(0);
-            tv.setAlpha(0.85f);
+            tv.setAlpha(1f);
 
         } else {
-            // UPCOMING — makin jauh makin redup
-            tv.setTextColor(getResources().getColor(R.color.white));
+            // UPCOMING — hint color, full alpha
+            tv.setTextColor(ContextCompat.getColor(this, R.color.text_hint));
             tv.setTypeface(android.graphics.Typeface.DEFAULT);
             tv.setTextSize(13f);
             tv.setBackgroundResource(0);
-            float alpha = diff == 1 ? 0.55f :
-                    diff == 2 ? 0.45f :
-                            diff == 3 ? 0.32f :
-                                    diff == 4 ? 0.22f : 0.12f;
-            tv.setAlpha(alpha);
+            tv.setAlpha(1f);
         }
     }
 
@@ -297,7 +294,7 @@ public class LyricsActivity extends AppCompatActivity
         llLyricsContainer.removeAllViews();
         TextView tv = new TextView(this);
         tv.setText("Lyrics not available for this track 🎵\n\nTry searching on Genius or AZLyrics");
-        tv.setTextColor(getResources().getColor(R.color.text_muted));
+        tv.setTextColor(ContextCompat.getColor(this, R.color.text_muted));
         tv.setTextSize(14f);
         tv.setGravity(android.view.Gravity.CENTER);
         tv.setPadding(16, 64, 16, 16);
