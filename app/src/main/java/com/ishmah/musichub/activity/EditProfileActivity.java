@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 import com.ishmah.musichub.R;
 import com.ishmah.musichub.ThemeHelper;
@@ -55,8 +56,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         ThemeHelper.apply(this);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
         userProfileDao = new UserProfileDao(this);
@@ -138,7 +139,7 @@ public class EditProfileActivity extends AppCompatActivity {
         android.util.TypedValue tv = new android.util.TypedValue();
         getTheme().resolveAttribute(android.R.attr.colorPrimary, tv, true);
         int accentColor = tv.data;
-        int mutedColor  = getResources().getColor(R.color.text_muted);
+        int mutedColor  = ContextCompat.getColor(this, R.color.text_muted);
 
         chipThemePurple.setBackgroundResource(
                 isAurora ? R.drawable.bg_chip_active : R.drawable.bg_chip_inactive);
@@ -172,10 +173,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 .putString("theme_name", selectedThemeName)
                 .apply();
 
+        // Aurora → night mode YES; Midnight and GoldRush → night mode NO
+        // Midnight MUST use NO so values-night/ (Aurora's purples) are never activated.
         AppCompatDelegate.setDefaultNightMode(
-                "light".equals(themeMode)
-                        ? AppCompatDelegate.MODE_NIGHT_NO
-                        : AppCompatDelegate.MODE_NIGHT_YES);
+                "aurora".equals(selectedThemeName)
+                        ? AppCompatDelegate.MODE_NIGHT_YES
+                        : AppCompatDelegate.MODE_NIGHT_NO);
 
         String photoToSave = (photoRemoved || selectedPhotoUri == null) ? "" : selectedPhotoUri;
 

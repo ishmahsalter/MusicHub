@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import com.bumptech.glide.Glide;
@@ -30,13 +31,15 @@ public class MainActivity extends AppCompatActivity
     private ProgressBar pbNp;
     private CardView cardNowPlaying;
     private MusicPlayerManager playerManager;
+    private String appliedThemeName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         ThemeHelper.apply(this);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        appliedThemeName = ThemeHelper.getThemeName(this);
         playerManager = MusicPlayerManager.getInstance();
         playerManager.init(this);
 
@@ -204,8 +207,8 @@ public class MainActivity extends AppCompatActivity
                 ? 0xFF4F6EF7
                 : getResources().getColor(R.color.purple_glow);
         int inactiveColor = isGoldRush
-                ? getResources().getColor(R.color.text_muted)
-                : getResources().getColor(R.color.white);
+                ? ContextCompat.getColor(this, R.color.text_muted)
+                : ContextCompat.getColor(this, R.color.white);
         float inactiveAlpha = isGoldRush ? 1f : 0.35f;
 
         LinearLayout[] navItems = {navHome, navSearch,
@@ -253,6 +256,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        // If theme changed while in EditProfileActivity, recreate to apply new theme
+        if (!ThemeHelper.getThemeName(this).equals(appliedThemeName)) {
+            recreate();
+            return;
+        }
         playerManager.addListener(this);
         if (playerManager.hasTrack()) {
             cardNowPlaying.setVisibility(View.VISIBLE);
