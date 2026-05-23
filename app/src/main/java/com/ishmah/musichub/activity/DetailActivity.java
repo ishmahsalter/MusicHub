@@ -8,8 +8,10 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.TypedValue;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
@@ -303,11 +305,12 @@ public class DetailActivity extends AppCompatActivity
     private void updateLikeIcon() {
         if (isLiked) {
             ivLike.setImageResource(R.drawable.ic_heart_filled);
-            ivLike.clearColorFilter();
+            TypedValue tv = new TypedValue();
+            getTheme().resolveAttribute(android.R.attr.colorPrimary, tv, true);
+            ivLike.setColorFilter(tv.data);
         } else {
             ivLike.setImageResource(R.drawable.ic_heart);
-            ivLike.setColorFilter(getResources()
-                    .getColor(R.color.text_muted));
+            ivLike.setColorFilter(ContextCompat.getColor(this, R.color.text_secondary));
         }
     }
 
