@@ -106,6 +106,9 @@ public class ProfileFragment extends Fragment {
             String photoUri = profile.get("photo_uri");
             if (photoUri != null && !photoUri.isEmpty() && isAdded()) {
                 Glide.with(this).load(Uri.parse(photoUri)).circleCrop().into(ivAvatar);
+            } else if (isAdded()) {
+                Glide.with(this).clear(ivAvatar);
+                ivAvatar.setImageResource(R.drawable.ic_profile);
             }
         }
 

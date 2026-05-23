@@ -32,6 +32,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private TextView chipThemePurple, chipThemeDark, chipThemeGold;
     private UserProfileDao userProfileDao;
     private String selectedPhotoUri = null;
+    private boolean photoRemoved = false;
     // Internal name: "aurora" | "midnight" | "goldrush"
     private String selectedThemeName = "aurora";
 
@@ -47,6 +48,7 @@ public class EditProfileActivity extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
                     selectedPhotoUri = uri.toString();
+                    photoRemoved = false;
                     Glide.with(this).load(uri).into(ivAvatar);
                 }
             });
@@ -86,6 +88,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_delete_photo).setOnClickListener(v -> {
             selectedPhotoUri = null;
+            photoRemoved = true;
+            Glide.with(this).clear(ivAvatar);
             ivAvatar.setImageResource(R.drawable.ic_profile);
         });
 
@@ -106,11 +110,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 if (username != null) etUsername.setText(username);
                 if (bio != null)      etBio.setText(bio);
-                if (photoUri != null && !photoUri.isEmpty()) {
+                if (!photoRemoved && photoUri != null && !photoUri.isEmpty()) {
                     selectedPhotoUri = photoUri;
                     Glide.with(this).load(Uri.parse(photoUri))
                             .placeholder(R.drawable.ic_profile)
                             .into(ivAvatar);
+                } else if (photoRemoved) {
+                    // Keep the cleared state — do not restore old URI from DB
+                    ivAvatar.setImageResource(R.drawable.ic_profile);
                 }
                 if (notif != null) swNotifications.setChecked("1".equals(notif));
                 // Theme chip already set from SharedPreferences in onCreate — no override needed
@@ -128,20 +135,22 @@ public class EditProfileActivity extends AppCompatActivity {
         boolean isMidnight = "midnight".equals(selectedThemeName);
         boolean isGoldRush = "goldrush".equals(selectedThemeName);
 
+        android.util.TypedValue tv = new android.util.TypedValue();
+        getTheme().resolveAttribute(android.R.attr.colorPrimary, tv, true);
+        int accentColor = tv.data;
+        int mutedColor  = getResources().getColor(R.color.text_muted);
+
         chipThemePurple.setBackgroundResource(
                 isAurora ? R.drawable.bg_chip_active : R.drawable.bg_chip_inactive);
-        chipThemePurple.setTextColor(getResources().getColor(
-                isAurora ? R.color.purple_soft : R.color.text_muted));
+        chipThemePurple.setTextColor(isAurora ? accentColor : mutedColor);
 
         chipThemeDark.setBackgroundResource(
                 isMidnight ? R.drawable.bg_chip_active : R.drawable.bg_chip_inactive);
-        chipThemeDark.setTextColor(getResources().getColor(
-                isMidnight ? R.color.purple_soft : R.color.text_muted));
+        chipThemeDark.setTextColor(isMidnight ? accentColor : mutedColor);
 
         chipThemeGold.setBackgroundResource(
                 isGoldRush ? R.drawable.bg_chip_active : R.drawable.bg_chip_inactive);
-        chipThemeGold.setTextColor(getResources().getColor(
-                isGoldRush ? R.color.purple_soft : R.color.text_muted));
+        chipThemeGold.setTextColor(isGoldRush ? accentColor : mutedColor);
     }
 
     private void saveProfile() {
@@ -168,12 +177,17 @@ public class EditProfileActivity extends AppCompatActivity {
                         ? AppCompatDelegate.MODE_NIGHT_NO
                         : AppCompatDelegate.MODE_NIGHT_YES);
 
+        String photoToSave = (photoRemoved || selectedPhotoUri == null) ? "" : selectedPhotoUri;
+
         userProfileDao.saveProfile(
                 username, bio,
-                selectedPhotoUri != null ? selectedPhotoUri : "",
+                photoToSave,
                 selectedThemeName, notifEnabled,
-                // FIX #3: mainHandler.post instead of runOnUiThread
                 () -> mainHandler.post(() -> {
+                    if (photoRemoved) {
+                        Glide.with(this).clear(ivAvatar);
+                        ivAvatar.setImageResource(R.drawable.ic_profile);
+                    }
                     Toast.makeText(this, "Profile saved!", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     finish();
