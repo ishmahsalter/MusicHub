@@ -158,7 +158,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textColor="@color/purple_glow"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:fontFamily="@font/font_bebas" />
                 <TextView
@@ -184,7 +184,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textColor="@color/purple_glow"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:fontFamily="@font/font_bebas" />
                 <TextView
@@ -271,7 +271,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+ NEW"
-                android:textColor="@color/purple_glow"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="13sp"
                 android:fontFamily="@font/font_space_grotesk"
                 android:padding="6dp"
@@ -326,7 +326,7 @@
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:text="Edit Profile"
-            android:textColor="@color/purple_glow"
+            android:textColor="?attr/colorPrimary"
             android:fontFamily="@font/font_space_grotesk"
             android:backgroundTint="@color/bg_card"
             android:layout_margin="16dp"

@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="✦ Trending"
-                    android:textColor="@color/purple_soft"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="11sp"
                     android:fontFamily="@font/font_space_grotesk"
                     android:background="@drawable/bg_chip_active"

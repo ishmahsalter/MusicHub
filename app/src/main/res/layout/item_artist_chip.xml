@@ -15,7 +15,7 @@
         android:layout_height="56dp"
         android:src="@drawable/ic_profile"
         app:civ_border_width="1.5dp"
-        app:civ_border_color="@color/purple_primary" />
+        app:civ_border_color="?attr/colorPrimary" />
 
     <TextView
         android:id="@+id/tv_artist_name"

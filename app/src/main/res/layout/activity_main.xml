@@ -26,7 +26,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="4dp"
         android:visibility="gone"
-        app:cardBackgroundColor="#33A855F7"
+        app:cardBackgroundColor="?attr/nowPlayingCardBg"
         app:cardCornerRadius="14dp"
         app:cardElevation="0dp">
 
@@ -50,7 +50,7 @@
                     android:layout_marginEnd="8dp"
                     app:cardCornerRadius="9dp"
                     app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/purple_deeper">
+                    app:cardBackgroundColor="?attr/colorSurface">
 
                     <ImageView
                         android:id="@+id/iv_np_art"
@@ -119,25 +119,25 @@
                 android:layout_marginBottom="3dp">
 
                 <View android:layout_width="2dp" android:layout_height="8dp"
-                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                    android:background="?attr/waveformBarColor" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="14dp"
-                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                    android:background="?attr/waveformBarColor" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="17dp"
                     android:background="#AAD4AF37" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="9dp"
-                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                    android:background="?attr/waveformBarColor" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="12dp"
-                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                    android:background="?attr/waveformBarColor" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="16dp"
                     android:background="#AAD4AF37" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="6dp"
-                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                    android:background="?attr/waveformBarColor" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="11dp"
-                    android:background="#88A855F7" android:layout_marginEnd="2dp"/>
+                    android:background="?attr/waveformBarColor" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="15dp"
                     android:background="#AAD4AF37" android:layout_marginEnd="2dp"/>
                 <View android:layout_width="2dp" android:layout_height="8dp"
-                    android:background="#88A855F7"/>
+                    android:background="?attr/waveformBarColor"/>
 
             </LinearLayout>
 

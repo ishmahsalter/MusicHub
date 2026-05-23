@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Transparent accent fills/strokes — resolve per-theme for Midnight vs Aurora vs Gold Rush -->
+    <attr name="chipActiveFill" format="color"/>
+    <attr name="chipActiveStroke" format="color"/>
+    <attr name="accentCardFill" format="color"/>
+    <attr name="accentCardStroke" format="color"/>
+    <attr name="waveformBarColor" format="color"/>
+    <attr name="nowPlayingCardBg" format="color"/>
+</resources>

@@ -162,8 +162,9 @@ public class HomeFragment extends Fragment {
         }
         activeChip.setBackground(requireContext()
                 .getDrawable(R.drawable.bg_chip_active));
-        activeChip.setTextColor(requireContext()
-                .getResources().getColor(R.color.purple_soft));
+        android.util.TypedValue tv = new android.util.TypedValue();
+        requireContext().getTheme().resolveAttribute(android.R.attr.colorPrimary, tv, true);
+        activeChip.setTextColor(tv.data);
     }
 
     private void loadFeaturedCards() {

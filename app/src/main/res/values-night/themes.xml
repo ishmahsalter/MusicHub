@@ -34,6 +34,13 @@
         <!-- No action bar -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <!-- Aurora accent fills (night mode) -->
+        <item name="chipActiveFill">#33A855F7</item>
+        <item name="chipActiveStroke">#66A855F7</item>
+        <item name="accentCardFill">#1AA855F7</item>
+        <item name="accentCardStroke">#33A855F7</item>
+        <item name="waveformBarColor">#88A855F7</item>
+        <item name="nowPlayingCardBg">#33A855F7</item>
 
     </style>
 

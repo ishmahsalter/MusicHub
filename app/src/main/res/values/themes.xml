@@ -27,6 +27,13 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <!-- Gold Rush accent fills (day mode) -->
+        <item name="chipActiveFill">#336B21A8</item>
+        <item name="chipActiveStroke">#666B21A8</item>
+        <item name="accentCardFill">#1A6B21A8</item>
+        <item name="accentCardStroke">#336B21A8</item>
+        <item name="waveformBarColor">#886B21A8</item>
+        <item name="nowPlayingCardBg">#336B21A8</item>
     </style>
 
     <!--
@@ -56,6 +63,13 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <!-- Midnight neon-blue accent fills -->
+        <item name="chipActiveFill">#334F6EF7</item>
+        <item name="chipActiveStroke">#664F6EF7</item>
+        <item name="accentCardFill">#1A4F6EF7</item>
+        <item name="accentCardStroke">#334F6EF7</item>
+        <item name="waveformBarColor">#884F6EF7</item>
+        <item name="nowPlayingCardBg">#334F6EF7</item>
     </style>
 
     <!-- Text styles -->
