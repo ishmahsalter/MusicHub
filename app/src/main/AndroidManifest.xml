@@ -67,6 +67,12 @@
             android:name=".activity.PlaylistDetailActivity"
             android:exported="false" />
 
+        <!-- FOLLOWING -->
+        <activity
+            android:name=".activity.FollowingActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity" />
+
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.ishmah.musichub.R;
 import com.ishmah.musichub.activity.EditProfileActivity;
+import com.ishmah.musichub.activity.FollowingActivity;
 import com.ishmah.musichub.activity.PlaylistDetailActivity;
 import com.ishmah.musichub.adapter.PlaylistCardAdapter;
 import com.ishmah.musichub.db.ArtistDao;
@@ -81,6 +82,9 @@ public class ProfileFragment extends Fragment {
         rvPlaylists.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         rvPlaylists.setAdapter(playlistCardAdapter);
 
+        view.findViewById(R.id.ll_stat_following).setOnClickListener(v ->
+                startActivity(new Intent(requireContext(), FollowingActivity.class)));
+
         View.OnClickListener openEdit = v ->
                 startActivity(new Intent(requireContext(), EditProfileActivity.class));
         view.findViewById(R.id.btn_settings).setOnClickListener(openEdit);
@@ -94,6 +98,7 @@ public class ProfileFragment extends Fragment {
         super.onResume();
         loadProfile();
         loadPlaylists();
+        loadFollowingCount();
     }
 
     private void loadProfile() {
@@ -112,8 +117,6 @@ public class ProfileFragment extends Fragment {
             }
         }
 
-        tvFollowing.setText(String.valueOf(artistDao.getFollowingCount()));
-
         executor.execute(() -> {
             List<Map<String, String>> favorites = favoriteDao.getAllFavorites();
             int likedCount = favorites.size();
@@ -126,6 +129,16 @@ public class ProfileFragment extends Fragment {
         userProfileDao.getTotalListeningSeconds(seconds -> {
             if (isAdded() && getActivity() != null) {
                 tvListenHours.setText(formatListenTime(seconds));
+            }
+        });
+    }
+
+    private void loadFollowingCount() {
+        executor.execute(() -> {
+            int count = artistDao.getFollowingCount();
+            if (getActivity() != null) {
+                new Handler(Looper.getMainLooper()).post(() ->
+                        tvFollowing.setText(String.valueOf(count)));
             }
         });
     }
