@@ -107,14 +107,14 @@ public class HomeFragment extends Fragment {
                 .create(DeezerApi.class);
         cachedImageDao = new CachedImageDao(requireContext());
 
-        // Search bar click
-        view.findViewById(R.id.tv_search_hint).setOnClickListener(v -> {
-            if (getActivity() != null) {
-                androidx.navigation.Navigation
-                        .findNavController(view)
-                        .navigate(R.id.searchFragment);
+        // Search bar click — both the card and inner text navigate to SearchFragment
+        View.OnClickListener openSearch = v -> {
+            if (getActivity() instanceof com.ishmah.musichub.activity.MainActivity) {
+                ((com.ishmah.musichub.activity.MainActivity) requireActivity()).openSearch();
             }
-        });
+        };
+        view.findViewById(R.id.cv_search_bar).setOnClickListener(openSearch);
+        view.findViewById(R.id.tv_search_hint).setOnClickListener(openSearch);
 
         // Chip clicks
         chipTrending.setOnClickListener(v -> {

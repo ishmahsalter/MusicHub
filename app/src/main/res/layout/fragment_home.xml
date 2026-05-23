@@ -61,9 +61,12 @@
 
         <!-- Search Bar -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_search_bar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="@color/search_bar_bg"
             app:cardCornerRadius="11dp"
             app:cardElevation="0dp"

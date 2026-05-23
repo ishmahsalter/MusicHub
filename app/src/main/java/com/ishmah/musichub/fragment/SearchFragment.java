@@ -1,5 +1,6 @@
 package com.ishmah.musichub.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextWatcher;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -76,6 +78,19 @@ public class SearchFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_search, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (etSearch != null && etSearch.getText().toString().isEmpty()) {
+            etSearch.postDelayed(() -> {
+                etSearch.requestFocus();
+                InputMethodManager imm = (InputMethodManager)
+                        requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) imm.showSoftInput(etSearch, InputMethodManager.SHOW_IMPLICIT);
+            }, 100);
+        }
     }
 
     @Override

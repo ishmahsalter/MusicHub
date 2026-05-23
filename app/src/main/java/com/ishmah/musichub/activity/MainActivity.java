@@ -192,6 +192,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void openSearch() {
+        navController.navigate(R.id.searchFragment);
+        setActiveNav(navSearch);
+    }
+
     private void setActiveNav(LinearLayout active) {
         boolean isMidnight = ThemeHelper.isMidnight(this);
         boolean isGoldRush = ThemeHelper.isGoldRush(this);
