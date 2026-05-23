@@ -73,7 +73,13 @@ public class ArtistActivity extends AppCompatActivity {
         btnShare = findViewById(R.id.btn_share);
         rvDiscography = findViewById(R.id.rv_discography);
 
-        albumAdapter = new AlbumAdapter(this, albums);
+        albumAdapter = new AlbumAdapter(this, albums, album -> {
+            Intent intent = new Intent(this, AlbumActivity.class);
+            intent.putExtra("album_name", album.get("name"));
+            intent.putExtra("artist_name", artistName);
+            intent.putExtra("album_art", album.get("image") != null ? album.get("image") : "");
+            startActivity(intent);
+        });
         rvDiscography.setLayoutManager(new LinearLayoutManager(this));
         rvDiscography.setAdapter(albumAdapter);
     }

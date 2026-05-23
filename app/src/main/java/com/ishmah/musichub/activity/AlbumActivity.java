@@ -80,9 +80,22 @@ public class AlbumActivity extends AppCompatActivity {
         rvTracks.setAdapter(trackAdapter);
 
         Intent intent = getIntent();
+
+        // Path A: came from ArtistActivity with direct album name
+        String directAlbumName = intent.getStringExtra("album_name");
+        String directArtistName = intent.getStringExtra("artist_name");
+        String directAlbumArt = intent.getStringExtra("album_art");
+
+        // Path B: came from DetailActivity with track name
         passedArtistName = intent.getStringExtra("artistName");
         passedTrackName = intent.getStringExtra("trackName");
         passedAlbumArt = intent.getStringExtra("albumArt");
+
+        // Path A takes precedence
+        if (directAlbumName != null && directArtistName != null) {
+            passedArtistName = directArtistName;
+            passedAlbumArt = directAlbumArt != null ? directAlbumArt : "";
+        }
 
         if (passedArtistName != null) tvAlbumArtist.setText(passedArtistName);
 
@@ -136,8 +149,11 @@ public class AlbumActivity extends AppCompatActivity {
             return;
         }
 
-        // Step 1: Look up album name via track.getInfo
-        if (passedTrackName != null && passedArtistName != null) {
+        // Path A: album name known directly — skip track lookup
+        if (directAlbumName != null && directArtistName != null) {
+            loadAlbum(directAlbumName, directArtistName);
+        } else if (passedTrackName != null && passedArtistName != null) {
+            // Path B: look up album name via track.getInfo
             fetchAlbumViaTrackInfo();
         }
     }

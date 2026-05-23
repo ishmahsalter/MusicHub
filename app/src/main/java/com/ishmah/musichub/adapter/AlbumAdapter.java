@@ -15,12 +15,24 @@ import java.util.Map;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.VH> {
 
+    public interface OnAlbumClickListener {
+        void onAlbumClick(Map<String, String> album);
+    }
+
     private final Context context;
     private final List<Map<String, String>> albums;
+    private OnAlbumClickListener listener;
 
     public AlbumAdapter(Context context, List<Map<String, String>> albums) {
         this.context = context;
         this.albums = albums;
+    }
+
+    public AlbumAdapter(Context context, List<Map<String, String>> albums,
+                        OnAlbumClickListener listener) {
+        this.context = context;
+        this.albums = albums;
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,6 +46,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.VH> {
     public void onBindViewHolder(@NonNull VH holder, int position) {
         Map<String, String> album = albums.get(position);
         holder.tvName.setText(album.get("name"));
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onAlbumClick(album);
+        });
 
         String plays = album.get("playcount");
         if (plays != null && !plays.isEmpty()) {
