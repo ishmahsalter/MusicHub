@@ -1,64 +1,389 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?android:colorBackground"
-    android:padding="16dp">
+    android:background="?android:colorBackground">
 
-    <!-- Logo -->
+    <!-- ── HEADER ── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="12dp">
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="12dp">
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_musichub_logo"
-            android:scaleType="fitCenter"
-            android:layout_marginEnd="8dp" />
+        <!-- Logo row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_musichub_logo"
+                android:scaleType="fitCenter"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MUSICHUB"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:fontFamily="@font/font_bebas"
+                android:letterSpacing="0.2" />
+
+        </LinearLayout>
+
+        <!-- Title + Stats -->
         <TextView
+            android:id="@+id/tv_library_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MUSICHUB"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
+            android:text="MY LIBRARY"
+            android:textColor="@color/gold_primary"
+            android:textSize="30sp"
             android:fontFamily="@font/font_bebas"
-            android:letterSpacing="0.2" />
+            android:letterSpacing="0.1" />
+
+        <TextView
+            android:id="@+id/tv_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:fontFamily="@font/font_dm_sans"
+            android:layout_marginBottom="14dp" />
+
+        <!-- Filter Chips -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chip_playlists"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Playlists"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_active"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chip_albums"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Albums"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_inactive"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chip_artists"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Artists"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_inactive"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chip_liked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Liked Songs"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_space_grotesk"
+                    android:background="@drawable/bg_chip_inactive"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MY FAVORITES"
-        android:textColor="@color/text_primary"
-        android:textSize="24sp"
-        android:fontFamily="@font/font_bebas"
-        android:letterSpacing="0.1"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Empty State -->
-    <TextView
-        android:id="@+id/tv_empty"
+    <!-- Divider -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="No favorites yet.\nLike a song to see it here!"
-        android:textColor="@color/text_muted"
-        android:textSize="14sp"
-        android:fontFamily="@font/font_dm_sans"
-        android:gravity="center"
-        android:layout_marginTop="48dp"
-        android:visibility="gone" />
+        android:layout_height="1dp"
+        android:background="?attr/chipActiveStroke" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_favorites"
+    <!-- ── TAB CONTENT ── -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- PLAYLISTS TAB -->
+        <LinearLayout
+            android:id="@+id/tab_playlists"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PLAYLISTS"
+                    android:textColor="@color/section_title"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.2"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/btn_new_playlist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ NEW"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.15"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:background="@drawable/bg_chip_active"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_playlists"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="8dp"
+                android:clipToPadding="false" />
+
+            <TextView
+                android:id="@+id/tv_empty_playlists"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No playlists yet.\nTap + NEW to create one."
+                android:textColor="@color/text_muted"
+                android:textSize="13sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:gravity="center"
+                android:paddingTop="48dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- ALBUMS TAB -->
+        <LinearLayout
+            android:id="@+id/tab_albums"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ALBUMS"
+                android:textColor="@color/section_title"
+                android:textSize="10sp"
+                android:fontFamily="@font/font_bebas"
+                android:letterSpacing="0.2"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="6dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_albums"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:clipToPadding="false" />
+
+            <TextView
+                android:id="@+id/tv_empty_albums"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No albums yet.\nLike some songs to see their albums here."
+                android:textColor="@color/text_muted"
+                android:textSize="13sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:gravity="center"
+                android:paddingTop="48dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- ARTISTS TAB -->
+        <LinearLayout
+            android:id="@+id/tab_artists"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FOLLOWING"
+                android:textColor="@color/section_title"
+                android:textSize="10sp"
+                android:fontFamily="@font/font_bebas"
+                android:letterSpacing="0.2"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="6dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_artists"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingBottom="8dp"
+                android:clipToPadding="false" />
+
+            <TextView
+                android:id="@+id/tv_empty_artists"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Not following any artists yet.\nHeart an artist to follow them."
+                android:textColor="@color/text_muted"
+                android:textSize="13sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:gravity="center"
+                android:paddingTop="48dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- LIKED SONGS TAB -->
+        <LinearLayout
+            android:id="@+id/tab_liked"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Play All button row -->
+            <LinearLayout
+                android:id="@+id/btn_play_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_play"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="PLAY ALL"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/font_bebas"
+                    android:letterSpacing="0.15" />
+
+                <TextView
+                    android:id="@+id/tv_liked_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/font_dm_sans" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/chipActiveStroke"
+                android:visibility="gone"
+                android:id="@+id/divider_liked" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_liked"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_empty_liked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No liked songs yet.\nHeart a track to save it here."
+                android:textColor="@color/text_muted"
+                android:textSize="13sp"
+                android:fontFamily="@font/font_dm_sans"
+                android:gravity="center"
+                android:paddingTop="48dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>
