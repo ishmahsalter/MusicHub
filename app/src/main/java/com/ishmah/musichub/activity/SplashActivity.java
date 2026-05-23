@@ -19,8 +19,8 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         ThemeHelper.apply(this);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
         progressBar = findViewById(R.id.progress_bar);

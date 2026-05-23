@@ -54,8 +54,8 @@ public class AlbumActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         ThemeHelper.apply(this);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album);
 
         lastFmApi = RetrofitClient.getLastFmInstance().create(LastFmApi.class);
