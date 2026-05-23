@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.ishmah.musichub.MusicPlayerManager;
 import com.ishmah.musichub.R;
 import com.ishmah.musichub.ThemeHelper;
+import androidx.core.content.ContextCompat;
 import com.ishmah.musichub.adapter.PlaylistTrackAdapter;
 import com.ishmah.musichub.api.DeezerApi;
 import com.ishmah.musichub.db.PlaylistDao;
@@ -262,16 +263,16 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         TextView nameLabel = new TextView(this);
         nameLabel.setText("PLAYLIST NAME");
         nameLabel.setTextSize(11);
-        nameLabel.setTextColor(0xFFCEB673);
+        nameLabel.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
         nameLabel.setPadding(0, 0, 0, 6 * dp);
         container.addView(nameLabel);
 
         EditText etName = new EditText(this);
         etName.setText(playlistName);
         etName.setInputType(InputType.TYPE_CLASS_TEXT);
-        etName.setTextColor(0xFFFFFFFF);
-        etName.setHintTextColor(0x88FFFFFF);
-        etName.setBackground(null);
+        etName.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+        etName.setHintTextColor(ContextCompat.getColor(this, R.color.text_hint));
+        etName.setHint("Playlist name");
         etName.setPadding(0, 4 * dp, 0, 16 * dp);
         container.addView(etName);
 
@@ -279,7 +280,7 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         TextView coverLabel = new TextView(this);
         coverLabel.setText("COVER COLOR");
         coverLabel.setTextSize(11);
-        coverLabel.setTextColor(0xFFCEB673);
+        coverLabel.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
         coverLabel.setPadding(0, 0, 0, 8 * dp);
         container.addView(coverLabel);
 
@@ -325,7 +326,8 @@ public class PlaylistDetailActivity extends AppCompatActivity {
 
         // --- Gallery button ---
         Button btnGallery = new Button(this);
-        btnGallery.setText("Choose from Gallery");
+        btnGallery.setText("CHOOSE FROM GALLERY");
+        btnGallery.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
         LinearLayout.LayoutParams galleryLp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         galleryLp.topMargin = 12 * dp;
