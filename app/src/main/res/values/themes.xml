@@ -17,9 +17,13 @@
         <item name="colorSecondary">@color/gold_primary</item>
         <item name="colorSecondaryVariant">@color/gold_dark</item>
         <item name="colorOnSecondary">@color/text_primary</item>
-        <item name="android:textColorPrimary">@color/text_primary</item>
-        <item name="android:textColorSecondary">@color/text_secondary</item>
-        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="android:textColorPrimary">#1A0030</item>
+        <item name="android:textColorSecondary">#4A4A6A</item>
+        <item name="android:textColorHint">#9090B0</item>
+        <item name="textColorMuted">#9090B0</item>
+        <item name="textColorSectionTitle">#1A0030</item>
+        <item name="inputBgColor">@color/search_bar_bg</item>
+        <item name="inputStrokeColor">@color/search_bar_stroke</item>
         <item name="android:fontFamily">@font/font_space_grotesk</item>
         <item name="android:statusBarColor">@color/bg_primary</item>
         <item name="android:navigationBarColor">@color/bg_primary</item>
@@ -43,27 +47,40 @@
       Background: #000820  |  Accent: #4F6EF7  |  Cyan glow: #00D4FF
     -->
     <style name="Theme.MusicHub.Midnight" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Background: #000820 — deep navy, NOT Aurora's purple #07000F -->
         <item name="android:windowBackground">#000820</item>
         <item name="android:colorBackground">#000820</item>
         <item name="colorSurface">#050D2A</item>
         <item name="colorOnSurface">#FFFFFF</item>
+        <item name="colorOnBackground">#FFFFFF</item>
+        <!-- Primary accent: #4F6EF7 — neon blue, NOT Aurora's #7C3AED purple -->
         <item name="colorPrimary">#4F6EF7</item>
-        <item name="colorPrimaryVariant">#3A55D4</item>
+        <item name="colorPrimaryVariant">#3451D1</item>
         <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorAccent">#4F6EF7</item>
         <item name="colorSecondary">#00D4FF</item>
         <item name="colorSecondaryVariant">#0099BB</item>
         <item name="colorOnSecondary">#000000</item>
-        <item name="colorAccent">#4F6EF7</item>
+        <item name="colorControlHighlight">#334F6EF7</item>
+        <!-- Text -->
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
-        <item name="android:textColorSecondary">#99FFFFFF</item>
+        <item name="android:textColorSecondary">#B0B8D4</item>
         <item name="android:textColorHint">#33FFFFFF</item>
         <item name="android:fontFamily">@font/font_space_grotesk</item>
+        <!-- Status / nav bars -->
         <item name="android:statusBarColor">#000820</item>
         <item name="android:navigationBarColor">#000820</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <!-- Midnight neon-blue accent fills -->
+        <!-- Midnight adaptive text colors — must be set so @color/text_muted and @color/section_title resolve correctly -->
+        <item name="textColorMuted">#7080A0</item>
+        <item name="textColorSectionTitle">#4F6EF7</item>
+        <!-- Midnight input backgrounds — dark navy instead of light lavender from Gold Rush -->
+        <item name="inputBgColor">#0D1B3E</item>
+        <item name="inputStrokeColor">#4C4F6EF7</item>
+        <!-- Midnight neon-blue accent fills (all hardcoded — zero @color/ refs) -->
         <item name="chipActiveFill">#334F6EF7</item>
         <item name="chipActiveStroke">#664F6EF7</item>
         <item name="accentCardFill">#1A4F6EF7</item>
@@ -75,18 +92,18 @@
     <!-- Text styles -->
     <style name="TextStyle.Display" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_bebas</item>
-        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:letterSpacing">0.1</item>
     </style>
 
     <style name="TextStyle.Body" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_dm_sans</item>
-        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
     <style name="TextStyle.Meta" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_space_grotesk</item>
-        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textColor">?attr/textColorMuted</item>
     </style>
 
 </resources>

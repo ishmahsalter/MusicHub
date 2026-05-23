@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+      Aurora night override for Theme.MusicHub.
+      Activated by MODE_NIGHT_YES — overrides values/themes.xml colors with Aurora purples.
+      Midnight MUST NOT reach here (it uses MODE_NIGHT_NO + setTheme(Midnight)).
+    -->
     <style name="Theme.MusicHub" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <!-- Background (dark Aurora Void) -->
+        <!-- Aurora backgrounds -->
         <item name="android:windowBackground">@color/bg_primary</item>
         <item name="android:colorBackground">@color/bg_primary</item>
         <item name="colorSurface">@color/bg_card</item>
         <item name="colorOnSurface">@color/text_primary</item>
 
-        <!-- Primary = Purple Glow -->
+        <!-- Aurora primary = deep purple #7C3AED -->
         <item name="colorPrimary">@color/purple_primary</item>
         <item name="colorPrimaryVariant">@color/purple_dark</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -18,49 +23,49 @@
         <item name="colorSecondaryVariant">@color/gold_dark</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Text (white on dark bg) -->
-        <item name="android:textColorPrimary">@color/text_primary</item>
-        <item name="android:textColorSecondary">@color/text_secondary</item>
-        <item name="android:textColorHint">@color/text_hint</item>
+        <!-- Text (white on dark bg) — hardcoded to avoid circular ref with res/color/text_primary.xml -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#99FFFFFF</item>
+        <item name="android:textColorHint">#33FFFFFF</item>
+        <item name="textColorMuted">#55FFFFFF</item>
+        <item name="textColorSectionTitle">#D4AF37</item>
+        <item name="inputBgColor">@color/search_bar_bg</item>
+        <item name="inputStrokeColor">@color/search_bar_stroke</item>
 
-        <!-- Default font = Space Grotesk -->
         <item name="android:fontFamily">@font/font_space_grotesk</item>
 
-        <!-- Status bar (dark mode uses light icons) -->
+        <!-- Status bar — dark icons off (light content on dark bg) -->
         <item name="android:statusBarColor">@color/bg_primary</item>
         <item name="android:navigationBarColor">@color/bg_primary</item>
         <item name="android:windowLightStatusBar">false</item>
 
-        <!-- No action bar -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <!-- Aurora accent fills (night mode) -->
-        <item name="chipActiveFill">#33A855F7</item>
-        <item name="chipActiveStroke">#66A855F7</item>
-        <item name="accentCardFill">#1AA855F7</item>
-        <item name="accentCardStroke">#33A855F7</item>
-        <item name="waveformBarColor">#88A855F7</item>
-        <item name="nowPlayingCardBg">#33A855F7</item>
+
+        <!-- Aurora custom accent fills (#7C3AED base) -->
+        <item name="chipActiveFill">#337C3AED</item>
+        <item name="chipActiveStroke">#667C3AED</item>
+        <item name="accentCardFill">#1A7C3AED</item>
+        <item name="accentCardStroke">#337C3AED</item>
+        <item name="waveformBarColor">#887C3AED</item>
+        <item name="nowPlayingCardBg">#337C3AED</item>
 
     </style>
 
-    <!-- Style untuk judul pakai Bebas Neue -->
     <style name="TextStyle.Display" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_bebas</item>
-        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:letterSpacing">0.1</item>
     </style>
 
-    <!-- Style untuk body pakai DM Sans -->
     <style name="TextStyle.Body" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_dm_sans</item>
-        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
-    <!-- Style untuk label/meta pakai Space Grotesk -->
     <style name="TextStyle.Meta" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/font_space_grotesk</item>
-        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textColor">?attr/textColorMuted</item>
     </style>
 
 </resources>

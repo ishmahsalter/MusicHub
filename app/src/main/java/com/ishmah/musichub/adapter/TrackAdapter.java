@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -221,8 +222,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.TrackViewHol
             ivLike.setAlpha(1f);
         } else {
             ivLike.setImageResource(R.drawable.ic_heart);
-            ivLike.setColorFilter(context.getResources()
-                    .getColor(R.color.text_muted));
+            ivLike.setColorFilter(ContextCompat.getColor(context, R.color.text_muted));
             ivLike.setAlpha(0.5f);
         }
     }

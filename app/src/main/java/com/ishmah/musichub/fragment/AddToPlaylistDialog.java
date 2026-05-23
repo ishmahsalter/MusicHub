@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -141,8 +142,8 @@ public class AddToPlaylistDialog extends DialogFragment {
     private void showCreatePlaylistDialog() {
         EditText etName = new EditText(requireContext());
         etName.setHint("Nama playlist...");
-        etName.setTextColor(requireContext().getResources().getColor(R.color.text_primary));
-        etName.setHintTextColor(requireContext().getResources().getColor(R.color.text_hint));
+        etName.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary));
+        etName.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.text_hint));
 
         new AlertDialog.Builder(requireContext())
                 .setTitle("New Playlist")

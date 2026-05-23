@@ -24,14 +24,7 @@
     <color name="gold_dark">#B8860B</color>
     <color name="gold_soft">#FEF3C7</color>
 
-    <!-- ══ TEXT (dark on light bg) ══ -->
-    <color name="text_primary">#1A0030</color>
-    <color name="text_secondary">#4A4A6A</color>
-    <color name="text_muted">#9090B0</color>
-    <color name="text_hint">#9090B0</color>
-
-    <!-- ══ SECTION TITLES ══ -->
-    <color name="section_title">#1A0030</color>
+    <!-- text_primary/secondary/muted/hint/section_title are in res/color/ as adaptive ColorStateLists -->
 
     <!-- ══ BORDERS ══ -->
     <color name="border_purple">#226B21A8</color>

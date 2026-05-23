@@ -7,4 +7,10 @@
     <attr name="accentCardStroke" format="color"/>
     <attr name="waveformBarColor" format="color"/>
     <attr name="nowPlayingCardBg" format="color"/>
+    <!-- Adaptive text colors — set per-theme so @color/text_muted and @color/section_title resolve correctly in Midnight -->
+    <attr name="textColorMuted" format="color"/>
+    <attr name="textColorSectionTitle" format="color"/>
+    <!-- Input / search bar surface colors — overridden in Midnight to dark navy -->
+    <attr name="inputBgColor" format="color"/>
+    <attr name="inputStrokeColor" format="color"/>
 </resources>

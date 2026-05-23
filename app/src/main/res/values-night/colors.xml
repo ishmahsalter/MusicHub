@@ -4,37 +4,30 @@
     <color name="bg_primary">#07000F</color>
     <color name="bg_secondary">#09001A</color>
     <color name="bg_tertiary">#110026</color>
-    <color name="bg_card">#130030</color>
+    <color name="bg_card">#13002E</color>
     <color name="bg_card_deep">#0C001F</color>
 
     <!-- ══ SEARCH BAR ══ -->
     <color name="search_bar_bg">#0A0020</color>
-    <color name="search_bar_stroke">#33A855F7</color>
+    <color name="search_bar_stroke">#337C3AED</color>
 
-    <!-- ══ PURPLE GLOW ══ -->
-    <color name="purple_primary">#A855F7</color>
-    <color name="purple_dark">#7C3AED</color>
-    <color name="purple_deeper">#6D28D9</color>
-    <color name="purple_subtle">#4C1D95</color>
-    <color name="purple_glow">#C084FC</color>
-    <color name="purple_soft">#E9D5FF</color>
+    <!-- ══ AURORA PURPLE ══ -->
+    <color name="purple_primary">#7C3AED</color>
+    <color name="purple_dark">#5B21B6</color>
+    <color name="purple_deeper">#4C1D95</color>
+    <color name="purple_subtle">#3B0764</color>
+    <color name="purple_glow">#A78BFA</color>
+    <color name="purple_soft">#DDD6FE</color>
 
     <!-- ══ GOLD ACCENTS ══ -->
     <color name="gold_primary">#D4AF37</color>
     <color name="gold_dark">#B8860B</color>
     <color name="gold_soft">#FEF3C7</color>
 
-    <!-- ══ TEXT (white on dark bg) ══ -->
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#99FFFFFF</color>
-    <color name="text_muted">#55FFFFFF</color>
-    <color name="text_hint">#33FFFFFF</color>
-
-    <!-- ══ SECTION TITLES (gold on dark) ══ -->
-    <color name="section_title">#D4AF37</color>
+    <!-- text_primary/secondary/muted/hint/section_title are in res/color/ as adaptive ColorStateLists -->
 
     <!-- ══ BORDERS ══ -->
-    <color name="border_purple">#47A855F7</color>
+    <color name="border_purple">#477C3AED</color>
     <color name="border_gold">#47D4AF37</color>
     <color name="border_white">#14FFFFFF</color>
 
@@ -43,15 +36,8 @@
     <color name="error">#EF4444</color>
     <color name="success">#4ADE80</color>
 
-    <!-- ══ MIDNIGHT ACCENT ══ -->
-    <color name="midnight_accent">#4F6EF7</color>
-    <color name="midnight_bg">#000820</color>
-    <color name="midnight_surface">#050D2A</color>
-    <color name="midnight_cyan">#00D4FF</color>
-
     <!-- ══ LEGACY ══ -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!-- Always white — use on colored buttons, hero images, gradient overlays -->
     <color name="text_on_dark">#FFFFFF</color>
 </resources>
