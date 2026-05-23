@@ -75,6 +75,14 @@ public class ArtistDao {
         return list;
     }
 
+    public void updateArtistPhoto(String artistId, String photoUrl) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COL_ARTIST_PHOTO, photoUrl);
+        db.update(DatabaseHelper.TABLE_FOLLOWING, values,
+                DatabaseHelper.COL_ARTIST_ID + " = ?",
+                new String[]{artistId});
+    }
+
     public int getFollowingCount() {
         Cursor cursor = db.query(DatabaseHelper.TABLE_FOLLOWING,
                 new String[]{DatabaseHelper.COL_ARTIST_ID},

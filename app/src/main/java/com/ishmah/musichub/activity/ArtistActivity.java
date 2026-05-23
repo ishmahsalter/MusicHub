@@ -3,6 +3,7 @@ package com.ishmah.musichub.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -124,8 +125,11 @@ public class ArtistActivity extends AppCompatActivity {
                     JsonArray data = response.body().getAsJsonArray("data");
                     if (data != null && data.size() > 0) {
                         JsonObject first = data.get(0).getAsJsonObject();
-                        String picUrl = first.get("picture_medium").getAsString();
+                        String picUrl = first.has("picture_xl")
+                                ? first.get("picture_xl").getAsString()
+                                : first.get("picture_medium").getAsString();
                         if (picUrl != null && !picUrl.isEmpty()) {
+                            artistPhoto = picUrl;
                             runOnUiThread(() ->
                                     Glide.with(ArtistActivity.this)
                                             .load(picUrl)
@@ -241,13 +245,54 @@ public class ArtistActivity extends AppCompatActivity {
             if (isFollowing) {
                 artistDao.unfollowArtist(artistId, null);
                 isFollowing = false;
+                updateFollowButton();
             } else {
-                artistDao.followArtist(artistId, artistName,
-                        artistPhoto != null ? artistPhoto : "",
-                        genre != null ? genre : "", null);
                 isFollowing = true;
+                updateFollowButton();
+                if (artistPhoto != null && !artistPhoto.isEmpty()) {
+                    Log.d("ArtistActivity", "Following with photo: " + artistPhoto);
+                    artistDao.followArtist(artistId, artistName, artistPhoto,
+                            genre != null ? genre : "", null);
+                } else {
+                    // Photo not fetched yet — get it first, then save
+                    deezerApi.searchArtist(artistName)
+                            .enqueue(new Callback<JsonObject>() {
+                                @Override
+                                public void onResponse(Call<JsonObject> call,
+                                                       Response<JsonObject> response) {
+                                    if (response.isSuccessful() &&
+                                            response.body() != null) {
+                                        try {
+                                            JsonArray data = response.body()
+                                                    .getAsJsonArray("data");
+                                            if (data != null && data.size() > 0) {
+                                                JsonObject first = data.get(0)
+                                                        .getAsJsonObject();
+                                                String picUrl = first.has("picture_xl")
+                                                        ? first.get("picture_xl").getAsString()
+                                                        : "";
+                                                artistPhoto = picUrl;
+                                                runOnUiThread(() ->
+                                                        Glide.with(ArtistActivity.this)
+                                                                .load(picUrl)
+                                                                .placeholder(R.color.bg_card)
+                                                                .into(ivArtistPhoto));
+                                            }
+                                        } catch (Exception ignored) {}
+                                    }
+                                    Log.d("ArtistActivity", "Following with photo: " + artistPhoto);
+                                    artistDao.followArtist(artistId, artistName,
+                                            artistPhoto != null ? artistPhoto : "",
+                                            genre != null ? genre : "", null);
+                                }
+                                @Override
+                                public void onFailure(Call<JsonObject> call, Throwable t) {
+                                    artistDao.followArtist(artistId, artistName, "",
+                                            genre != null ? genre : "", null);
+                                }
+                            });
+                }
             }
-            updateFollowButton();
         });
 
         btnShare.setOnClickListener(v -> {
