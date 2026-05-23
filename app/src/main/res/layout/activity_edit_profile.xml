@@ -110,10 +110,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/search_bar_bg"
+            app:cardBackgroundColor="?attr/inputBgColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
-            app:strokeColor="@color/search_bar_stroke"
+            app:strokeColor="?attr/inputStrokeColor"
             app:strokeWidth="1dp">
 
             <EditText
@@ -151,10 +151,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:cardBackgroundColor="@color/search_bar_bg"
+            app:cardBackgroundColor="?attr/inputBgColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
-            app:strokeColor="@color/search_bar_stroke"
+            app:strokeColor="?attr/inputStrokeColor"
             app:strokeWidth="1dp">
 
             <EditText

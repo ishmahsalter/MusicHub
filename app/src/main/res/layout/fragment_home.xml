@@ -67,10 +67,10 @@
             android:layout_marginBottom="10dp"
             android:clickable="true"
             android:focusable="true"
-            app:cardBackgroundColor="@color/search_bar_bg"
+            app:cardBackgroundColor="?attr/inputBgColor"
             app:cardCornerRadius="11dp"
             app:cardElevation="0dp"
-            app:strokeColor="@color/search_bar_stroke"
+            app:strokeColor="?attr/inputStrokeColor"
             app:strokeWidth="1dp">
 
             <LinearLayout
