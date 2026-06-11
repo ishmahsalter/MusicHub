@@ -4,7 +4,7 @@
 
 # MusicHub
 
-Aplikasi Android untuk eksplorasi musik yang dibangun sebagai Tugas Final Lab Mobile Programming 2026. MusicHub memungkinkan pengguna menjelajahi lagu-lagu trending, melihat diskografi artis, mengelola playlist pribadi, dan mengakses lirik tersinkronisasi — semuanya dibungkus dalam tiga pilihan tema visual yang dapat diganti langsung dari halaman profil.
+Aplikasi Android untuk eksplorasi musik yang dibangun sebagai Tugas Final Lab Mobile Programming 2026. MusicHub memungkinkan pengguna menjelajahi lagu-lagu trending, melihat diskografi artis, mengelola playlist pribadi, dan mengakses lirik tersinkronisasi semuanya dibungkus dalam tiga pilihan tema visual yang dapat diganti langsung dari halaman profil.
 
 ---
 
