@@ -26,12 +26,22 @@ Aplikasi Android untuk eksplorasi musik yang dibangun sebagai Tugas Final Lab Mo
 ## Fitur
 
 **Eksplorasi Musik**
+
+<p align="center">
+  <img src="assets/search.png" alt="Search" width="40%"/>
+</p>
+
 - Menelusuri lagu trending dan chart teratas yang didukung oleh Last.fm API
 - Filter genre melalui chip interaktif (Trending, Pop, Hip-Hop, R&B, Rock)
 - Featured cards yang dapat digeser dengan lagu teratas minggu ini
 - Pencarian multi-kategori: lagu, artis, album, dan rilis terbaru dengan auto-fokus keyboard
 
 **Pemutaran & Lirik**
+
+<p align="center">
+  <img src="assets/lyrics.png" alt="Lyrics" width="40%"/>
+</p>
+
 - Layar now playing penuh dengan kontrol pemutaran (play/pause, prev, next)
 - Visualizer waveform animasi saat lagu diputar
 - Lirik tersinkronisasi dengan sorotan baris aktif dan fitur berbagi lirik
@@ -39,16 +49,36 @@ Aplikasi Android untuk eksplorasi musik yang dibangun sebagai Tugas Final Lab Mo
 
 **Artis & Album**
 - Halaman artis lengkap: foto, biografi dari Last.fm, jumlah pendengar bulanan, total stream, dan diskografi penuh
+  
+<p align="center">
+  <img src="assets/album_detail.png" alt="Album Detail" width="40%"/>
+</p>
+
 - Halaman detail album dengan daftar lagu dan jumlah stream per lagu
+  
+<p align="center">
+  <img src="assets/artist_detail.png" alt="Artist Detail" width="40%"/>
+</p>
+
 - Tombol follow/unfollow yang langsung memperbarui jumlah following di profil
 
 **Manajemen Library**
+
+<p align="center">
+  <img src="assets/library.png" alt="Library" width="40%"/>
+</p>
+
 - Menyukai atau batal menyukai lagu, disimpan secara persisten ke SQLite lokal
 - Menyimpan lagu ke satu atau beberapa playlist melalui modal bottom sheet
 - Membuat, mengganti nama, dan menghapus playlist pribadi
 - Mengedit cover playlist dengan preset gradien atau foto kustom dari galeri
 
 **Profil & Following**
+
+<p align="center">
+  <img src="assets/profile.png" alt="Profile" width="40%"/>
+</p>
+
 - Username, bio, dan foto profil yang dapat diedit (galeri atau kamera)
 - Foto profil default ditampilkan kembali secara otomatis saat foto dihapus
 - Statistik profil real-time: jumlah lagu disukai, playlist, dan artis yang diikuti
@@ -57,11 +87,21 @@ Aplikasi Android untuk eksplorasi musik yang dibangun sebagai Tugas Final Lab Mo
 - Mengetuk baris artis di halaman Following langsung membuka halaman artis tersebut
 
 **Tema**
+
+<p align="center">
+  <img src="assets/theme_all.png" alt="All Theme" width="40%"/>
+</p>
+
 - Tiga pilihan tema visual yang dapat diganti dari halaman Edit Profil
 - Tema dipilih melalui chip interaktif dan langsung diterapkan ke seluruh aplikasi
 - Tema tersimpan di SharedPreferences dan tetap aktif setelah aplikasi ditutup
 
 **Mode Offline**
+
+<p align="center">
+  <img src="assets/offline.png" alt="Offline" width="40%"/>
+</p>
+
 - Lagu yang disukai, playlist, dan artis yang diikuti tetap dapat diakses tanpa internet
 - Gambar dari API di-cache ke SQLite agar tidak perlu request ulang
 - Tombol retry ditampilkan di semua layar saat koneksi tidak tersedia
@@ -71,16 +111,15 @@ Aplikasi Android untuk eksplorasi musik yang dibangun sebagai Tugas Final Lab Mo
 ## Tema
 
 MusicHub hadir dengan tiga tema visual yang dapat dipilih langsung dari layar Edit Profil. Masing-masing tema memiliki palet warna, aksen, dan nuansa yang berbeda.
+<p align="center">
+  <img src="assets/theme_all.png" alt="All Theme" width="40%"/>
+</p>
 
 ---
 
 ### Aurora
 
 Tema gelap dengan aksen ungu elektrik. Cocok untuk penggunaan malam hari dengan kontras tinggi dan tampilan futuristik.
-
-<p align="center">
-  <img src="assets/theme_aurora.png" alt="Tema Aurora" width="80%"/>
-</p>
 
 | | |
 |---|---|
@@ -95,10 +134,6 @@ Tema gelap dengan aksen ungu elektrik. Cocok untuk penggunaan malam hari dengan 
 
 Tema gelap dengan aksen biru neon yang intens. Memberikan kesan futuristik dan tegas, berbeda dari Aurora meskipun sama-sama mode gelap.
 
-<p align="center">
-  <img src="assets/theme_midnight.png" alt="Tema Midnight" width="80%"/>
-</p>
-
 | | |
 |---|---|
 | **Mode** | Gelap |
@@ -112,24 +147,12 @@ Tema gelap dengan aksen biru neon yang intens. Memberikan kesan futuristik dan t
 
 Tema terang dengan aksen emas dan ungu. Tampilan siang hari yang elegan dengan nuansa mewah.
 
-<p align="center">
-  <img src="assets/theme_goldrush.png" alt="Tema Gold Rush" width="80%"/>
-</p>
-
 | | |
 |---|---|
 | **Mode** | Terang |
 | **Warna aksen** | Emas `#D4AF37` dan ungu `#6B21A8` |
 | **Latar belakang** | Putih keunguan yang terang |
 | **Cocok untuk** | Penggunaan di siang hari atau di luar ruangan |
-
----
-
-### Perbandingan Ketiga Tema
-
-<p align="center">
-  <img src="assets/themes_comparison.png" alt="Perbandingan Aurora, Midnight, dan Gold Rush" width="100%"/>
-</p>
 
 ---
 
